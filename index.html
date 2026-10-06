@@ -1,0 +1,1990 @@
+<!DOCTYPE html><html lang="pt-BR" class="geist_a71539c9-module__T19VSG__variable geist_mono_8d43a2aa-module__8Li5zG__variable minecraft_e652a4ee-module__Sqf-KW__variable antialiased"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Log → Discord (webhook em discordWebhookUrl). Inclui: visita (1× por sessão), menu About/Highlights/Installation/FAQ, âncoras #about etc., download .jar.
+         Worker em endpoint só cobre download — visitas/menu precisam do webhook direto. -->
+    <script>window.__DOWNLOAD_LOG__ = { endpoint: '', secret: '', discordWebhookUrl: 'https://canary.discord.com/api/webhooks/1556052397732929617/ycHi2k6T-2XrGzrWZulV5ov304h0oCFjiv_KbCjtyMyYlgIFYdBlxpEpzfPn8orGhOk6' };</script>
+    <!-- Nome do site: altere só aqui quando mudar a marca -->
+    <script>window.__SITE_BRAND__ = { name: 'DungeonSelect', logoPart1: 'DUNGEON', logoPart2: 'SELECT' };</script>
+    <link rel="preload" href="_next/static/media/797e433ab948586e-s.p.09zddjkbdep5a.woff2" as="font" crossorigin="" type="font/woff2">
+    <link rel="preload" href="_next/static/media/caa3a2e1cccd8315-s.p.09~u27dqhyhd6.woff2" as="font" crossorigin="" type="font/woff2">
+    <link rel="preload" href="_next/static/media/minecraft-s.p.0lmv.wzzbb7tf.ttf" as="font" crossorigin="" type="font/ttf">
+    <link rel="stylesheet" href="_next/static/chunks/13igt_-ip_gy3.css" data-precedence="next">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <style>
+        /* ===== PREMIUM DUNGEON THEME ===== */
+        :root {
+            --gold: #d4a017 !important;
+            --gold-light: #f5c842 !important;
+            --gold-dark: #8b6914 !important;
+            --gold-glow: rgba(212, 160, 23, 0.25) !important;
+            --gold-subtle: rgba(212, 160, 23, 0.08) !important;
+            --red: #d4a017 !important;
+            --red-dark: #8b6914 !important;
+            --red-glow: rgba(212, 160, 23, 0.20) !important;
+            --red-subtle: rgba(212, 160, 23, 0.08) !important;
+            --bg-primary: #0a090d;
+            --bg-card: #12111a;
+            --bg-card2: #0f0e16;
+            --border-subtle: rgba(212,160,23,0.12);
+            --text-muted: rgba(255,255,255,0.45);
+        }
+
+        /* ===== SCROLLBAR ===== */
+        * { scrollbar-width: thin; scrollbar-color: var(--gold-dark) transparent; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+        /* ===== SELECTION ===== */
+        ::selection { background: rgba(212,160,23,0.3); color: #fff; }
+
+        /* ===== BASE ===== */
+        html { background: #0a090d !important; }
+        body {
+            background: #0a090d !important;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* ===== NOISE TEXTURE OVERLAY ===== */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.4;
+        }
+
+        /* ===== GRADIENT OVERRIDES ===== */
+        .bg-\[radial-gradient\(ellipse_at_center\,rgba\(220\,38\,38\,0\.06\)\,transparent_70\%\)\] {
+            background-image: radial-gradient(ellipse at center, rgba(212,160,23,0.10), transparent 70%) !important;
+        }
+        .bg-\[radial-gradient\(ellipse_at_center\,rgba\(220\,38\,38\,0\.08\)\,transparent_70\%\)\] {
+            background-image: radial-gradient(ellipse at center, rgba(212,160,23,0.15), transparent 70%) !important;
+        }
+
+        /* ===== TEXT SHADOWS ===== */
+        .\[text-shadow\:0_0_40px_rgba\(220\,38\,38\,0\.15\)\,0_2px_0_rgba\(0\,0\,0\,0\.8\)\] {
+            text-shadow: 0 0 60px rgba(212,160,23,0.25), 0 2px 0 rgba(0,0,0,0.9) !important;
+        }
+        .\[text-shadow\:0_0_60px_rgba\(220\,38\,38\,0\.3\)\,0_2px_0_\#5a1010\] {
+            text-shadow: 0 0 80px rgba(212,160,23,0.6), 0 0 140px rgba(212,160,23,0.2), 0 2px 0 #2a1d00 !important;
+        }
+
+        /* ===== DOWNLOAD BUTTONS ===== */
+        .bg-\[\#8B2020\] {
+            background: linear-gradient(135deg, #c4910f 0%, #d4a017 50%, #b8870e 100%) !important;
+            box-shadow: 0 4px 20px rgba(212,160,23,0.35), inset 0 1px 0 rgba(255,255,255,0.15) !important;
+        }
+        .hover\:bg-\[\#a02828\]:hover {
+            background: linear-gradient(135deg, #d4a830 0%, #e5b420 50%, #c49918 100%) !important;
+            box-shadow: 0 6px 30px rgba(212,160,23,0.5) !important;
+        }
+        .border-\[\#5a1010\] { border-color: #7a5a00 !important; }
+        .border-b-\[\#5a1010\] { border-bottom-color: #7a5a00 !important; }
+        .active\:border-t-\[\#b03030\]:active { border-top-color: #f5c842 !important; }
+
+        /* ===== BADGE / ACTION RPG ===== */
+        .bg-\[\#1a0a0a\]\/60 {
+            background: rgba(20,15,5,0.75) !important;
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(212,160,23,0.2) !important;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            background: rgba(10,9,13,0.85) !important;
+            backdrop-filter: blur(20px) saturate(180%) !important;
+            border-bottom: 1px solid rgba(212,160,23,0.12) !important;
+            box-shadow: 0 1px 30px rgba(0,0,0,0.5), 0 0 0 1px rgba(212,160,23,0.05) !important;
+        }
+
+        /* ===== NAV LINKS ===== */
+        header nav button {
+            position: relative;
+            transition: all 0.25s ease !important;
+        }
+        header nav button::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 50%;
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            transition: width 0.3s ease, left 0.3s ease;
+        }
+        header nav button:hover::after {
+            width: 60%;
+            left: 20%;
+        }
+        header nav button:hover {
+            color: rgba(255,255,255,0.95) !important;
+            background: rgba(212,160,23,0.08) !important;
+        }
+
+        /* ===== CARDS ===== */
+        .border-white\/\[0\.06\] {
+            border-color: rgba(212,160,23,0.1) !important;
+        }
+        .hover\:border-red\/20:hover, .hover\:border-red\/15:hover, .hover\:border-white\/\[0\.1\]:hover {
+            border-color: rgba(212,160,23,0.35) !important;
+            box-shadow: 0 0 20px rgba(212,160,23,0.08) !important;
+        }
+        .bg-\[\#0a0a0a\] {
+            background: #10100f !important;
+        }
+        .bg-\[\#0a0a0a\]\/80 {
+            background: rgba(16,16,15,0.85) !important;
+        }
+
+        /* ===== RED COLOR SYSTEM → GOLD ===== */
+        .text-red { color: #d4a017 !important; }
+        .text-red\/70 { color: rgba(212,160,23,0.75) !important; }
+        .text-red\/90 { color: rgba(212,160,23,0.92) !important; }
+        .text-red\/50 { color: rgba(212,160,23,0.55) !important; }
+        .group:hover .group-hover\:text-red { color: #d4a017 !important; }
+        .bg-red { background-color: #d4a017 !important; }
+        .bg-red\/\[0\.06\] { background: rgba(212,160,23,0.07) !important; }
+        .bg-red\/10 { background: rgba(212,160,23,0.1) !important; }
+        .border-red\/15 { border-color: rgba(212,160,23,0.2) !important; }
+        .border-red\/20 { border-color: rgba(212,160,23,0.25) !important; }
+        .from-red { --tw-gradient-from: #d4a017 !important; }
+        .to-\[\#ff6b6b\] { --tw-gradient-to: #f5c842 !important; }
+        .via-red\/0 { --tw-gradient-via: rgba(212,160,23,0) !important; }
+        .group:hover .group-hover\:via-red\/40 { --tw-gradient-via: rgba(212,160,23,0.4) !important; }
+        .hover\:border-red\/20:hover { border-color: rgba(212,160,23,0.3) !important; }
+        .shadow-red\/30 { box-shadow: 0 10px 25px rgba(212,160,23,0.3) !important; }
+        .animate-pulse { animation: gold-pulse 2s cubic-bezier(0.4,0,0.6,1) infinite !important; }
+        @keyframes gold-pulse {
+            0%, 100% { opacity: 1; background-color: #d4a017; }
+            50% { opacity: 0.5; background-color: #f5c842; }
+        }
+
+        /* ===== HERO SECTION ===== */
+        section:first-of-type {
+            background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(212,160,23,0.06) 0%, transparent 70%), #0a090d;
+        }
+
+        /* ===== STAT CARDS ===== */
+        .tabular-nums {
+            background: linear-gradient(135deg, #f5c842, #d4a017);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2.5rem !important;
+        }
+
+        /* ===== SECTION HEADINGS GRADIENT ===== */
+        .bg-gradient-to-r.from-red {
+            background: linear-gradient(135deg, #d4a017, #f5c842, #c49018) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text !important;
+        }
+
+        /* ===== STEP NUMBERS ===== */
+        .rounded-full.bg-red {
+            background: linear-gradient(135deg, #c4910f, #f5c842) !important;
+            box-shadow: 0 0 12px rgba(212,160,23,0.5) !important;
+        }
+        .rounded-xl.bg-red\/10.border.border-red\/20 {
+            background: rgba(212,160,23,0.08) !important;
+            border-color: rgba(212,160,23,0.2) !important;
+        }
+
+        /* ===== FAQ ===== */
+        .faq-item {
+            background: rgba(16,15,22,0.9) !important;
+            border: 1px solid rgba(212,160,23,0.1) !important;
+            transition: all 0.3s ease !important;
+        }
+        .faq-item:hover {
+            border-color: rgba(212,160,23,0.3) !important;
+            box-shadow: 0 0 25px rgba(212,160,23,0.07), inset 0 0 20px rgba(212,160,23,0.03) !important;
+            transform: translateY(-1px);
+        }
+        .faq-btn .faq-icon {
+            background: rgba(212,160,23,0.08) !important;
+            border: 1px solid rgba(212,160,23,0.15);
+            transition: all 0.3s ease;
+        }
+        .faq-item:hover .faq-icon {
+            background: rgba(212,160,23,0.15) !important;
+            color: #d4a017 !important;
+        }
+        .faq-icon svg {
+            transition: transform 0.3s ease, color 0.3s ease;
+            color: rgba(212,160,23,0.7) !important;
+        }
+        .faq-answer p {
+            border-top: 1px solid rgba(212,160,23,0.08);
+            padding-top: 1rem;
+            margin-top: 0;
+        }
+
+        /* ===== FOOTER ===== */
+        footer .rounded-2xl {
+            background: rgba(16,15,22,0.9) !important;
+            border: 1px solid rgba(212,160,23,0.1) !important;
+            box-shadow: inset 0 1px 0 rgba(212,160,23,0.05) !important;
+        }
+
+        /* ===== DISCORD BLOCK ===== */
+        .group.relative.block.overflow-hidden {
+            border-color: rgba(212,160,23,0.1) !important;
+            transition: all 0.4s ease !important;
+        }
+        .group.relative.block.overflow-hidden:hover {
+            border-color: rgba(212,160,23,0.35) !important;
+            box-shadow: 0 0 40px rgba(212,160,23,0.1) !important;
+        }
+
+        /* ===== BACKGROUND OVERRIDE ===== */
+        .bg-background { background: #0a090d !important; }
+
+        /* ===== HIGHLIGHTS TOP LINE ===== */
+        .group-hover\:via-red\/40 { --tw-gradient-stops: transparent, rgba(212,160,23,0.45), transparent !important; }
+
+        /* ===== ICON BADGES ===== */
+        .w-10.h-10.mx-auto.mb-3 {
+            background: rgba(212,160,23,0.06) !important;
+            border-radius: 12px;
+            border: 1px solid rgba(212,160,23,0.1);
+        }
+
+        /* ===== SUBTLE GLOW ON HERO TITLE ===== */
+        h1.font-minecraft {
+            letter-spacing: 0.02em;
+        }
+
+        /* ===== MINI PARTICLE ANIMATION ===== */
+        @keyframes float-up {
+            0% { transform: translateY(0) scale(1); opacity: 0.6; }
+            100% { transform: translateY(-40px) scale(0.5); opacity: 0; }
+        }
+
+        /* ===== SMOOTH IMAGE HOVER ===== */
+        .group:hover img {
+            transform: scale(1.03);
+            transition: transform 0.6s ease !important;
+        }
+        img { transition: transform 0.6s ease; }
+
+        /* ===== INSTALLATION STEPS LINE ===== */
+        .bg-gradient-to-b.from-red\/20.via-red\/10.to-transparent {
+            background: linear-gradient(to bottom, rgba(212,160,23,0.25), rgba(212,160,23,0.08), transparent) !important;
+        }
+
+        /* ===== SMALL CAPS LABELS ===== */
+        .text-red.uppercase.tracking-\[0\.2em\] {
+            letter-spacing: 0.3em !important;
+        }
+
+        /* ===== SECTION DIVIDERS ===== */
+        section + section {
+            border-top-color: rgba(212,160,23,0.06) !important;
+        }
+
+        /* ===== HERO BADGE ===== */
+        .inline-flex.items-center.gap-3.px-4.py-2.mb-8 {
+            background: rgba(212,160,23,0.07) !important;
+            border: 1px solid rgba(212,160,23,0.25) !important;
+            box-shadow: 0 0 20px rgba(212,160,23,0.08), inset 0 0 10px rgba(212,160,23,0.05);
+        }
+
+        /* ===== BACKGROUND SHIMMER ON HIGHLIGHT CARDS ===== */
+        .group.relative.rounded-2xl:hover::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(212,160,23,0.04), transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+            border-radius: inherit;
+        }
+
+        /* ===== BOTTOM BORDER GLOW ===== */
+        .absolute.bottom-0.left-0.right-0.h-\[1px\].bg-gradient-to-r {
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .group:hover .absolute.bottom-0.left-0.right-0.h-\[1px\].bg-gradient-to-r {
+            opacity: 1 !important;
+            background: linear-gradient(90deg, transparent, rgba(212,160,23,0.6), transparent) !important;
+        }
+
+        /* ===== CORNER ACCENTS (hero image) ===== */
+        .border-t-2.border-l-2,
+        .border-t-2.border-r-2,
+        .border-b-2.border-l-2,
+        .border-b-2.border-r-2 {
+            border-color: rgba(212,160,23,0.4) !important;
+        }
+
+        /* ===== GLOWING NUMBER COUNTERS ===== */
+        .group.relative.rounded-xl.border:hover .tabular-nums {
+            filter: drop-shadow(0 0 10px rgba(212,160,23,0.6));
+        }
+
+        /* ===== FONT-MINECRAFT HEADINGS FLAIR ===== */
+        .font-minecraft {
+            letter-spacing: 0.05em;
+        }
+
+        /* ===== BACKGROUND ===== */
+        html, body {
+            background: #0a090d !important;
+        }
+    </style>
+    <link rel="preload" as="script" fetchpriority="low" href="_next/static/chunks/15dpxuqklq~~q.js">
+    <script src="_next/static/chunks/0vs21x~9~ch8d.js" async=""></script>
+    <script src="_next/static/chunks/01gzsvj1ei--s.js" async=""></script>
+    <script src="_next/static/chunks/turbopack-0kf9bvn-c543h.js" async=""></script>
+    <script src="_next/static/chunks/109ek933tv7sr.js" async=""></script>
+    <script src="_next/static/chunks/0e0597~-2_0cj.js" async=""></script>
+    <script src="_next/static/chunks/0w2hcfkj.j1ij.js" async=""></script>
+    <meta name="next-size-adjust" content="">
+    <title>DungeonSelect</title>
+    <meta name="description" content="An epic Minecraft mod with dark dungeons, legendary bosses, rare artifacts and a limitless adventure.">
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="any">
+    <link rel="apple-touch-icon" href="/favicon.png">
+    <script src="_next/static/chunks/03~yq9q893hmn.js" nomodule=""></script>
+</head>
+
+<body class="min-h-screen flex flex-col bg-background text-foreground">
+    <div hidden=""><!--$--><!--/$--></div>
+    <main class="flex flex-col">
+        <header class="py-4 sticky top-0 z-50 bg-background/60 backdrop-blur-md supports-[backdrop-filter]:bg-background/85 border-b border-white/[0.06]">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+                <div class="flex items-center justify-between w-full">
+                    <div class="flex items-center flex-shrink-0 lg:w-[200px]"><a href="#" class="flex items-center select-none gap-2.5" style="text-decoration:none">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="w-[18px] h-[18px] text-[#f5c842]" aria-label="Globe icon" style="filter: drop-shadow(0 0 6px rgba(212,160,23,0.5));">
+                                <circle cx="12" cy="12" r="8"></circle>
+                                <path d="M3 12h18"></path>
+                                <path d="M12 4a14 14 0 0 0 0 16"></path>
+                                <path d="M12 4a14 14 0 0 1 0 16"></path>
+                                <path d="M4.5 7.5h15"></path>
+                                <path d="M4.5 16.5h15"></path>
+                            </svg>
+                            <span style="
+                                font-family: 'minecraft', monospace;
+                                font-size: 18px;
+                                font-weight: 700;
+                                letter-spacing: 0.04em;
+                                background: linear-gradient(135deg, #f5c842 0%, #d4a017 40%, #f5c842 70%, #c4910f 100%);
+                                -webkit-background-clip: text;
+                                -webkit-text-fill-color: transparent;
+                                background-clip: text;
+                                filter: drop-shadow(0 0 6px rgba(212,160,23,0.5));
+                                line-height: 1;
+                                text-transform: uppercase;
+                            ">DUNGEON<span style="
+                                background: linear-gradient(135deg, #ffffff 0%, #e8d5a0 40%, #d4a017 100%);
+                                -webkit-background-clip: text;
+                                -webkit-text-fill-color: transparent;
+                                background-clip: text;
+                            ">SELECT</span></span>
+                        </a></div>
+                    <nav class="hidden lg:flex items-center justify-center flex-1">
+                        <ul class="flex justify-center items-center gap-2">
+                            <li><button type="button" data-scroll-target="#about" class="font-normal text-[13px] flex gap-2 items-center justify-center py-2 px-4 rounded-lg transition-all duration-200 text-white/50 hover:text-white/80 hover:bg-white/[0.05] cursor-pointer"><img alt="" loading="lazy" width="18" height="18" decoding="async" data-nimg="1" class="w-[18px] h-[18px]" style="color:transparent" src="imgs/creeper1.png"><span>About</span></button>
+                            </li>
+                            <li><button type="button" data-scroll-target="#highlights" class="font-normal text-[13px] flex gap-2 items-center justify-center py-2 px-4 rounded-lg transition-all duration-200 text-white/50 hover:text-white/80 hover:bg-white/[0.05] cursor-pointer"><img alt="" loading="lazy" width="18" height="18" decoding="async" data-nimg="1" class="w-[18px] h-[18px]" style="color:transparent" src="imgs/creeper2.png"><span>Highlights</span></button>
+                            </li>
+                            <li><button type="button" data-scroll-target="#installation" class="font-normal text-[13px] flex gap-2 items-center justify-center py-2 px-4 rounded-lg transition-all duration-200 text-white/50 hover:text-white/80 hover:bg-white/[0.05] cursor-pointer"><img alt="" loading="lazy" width="18" height="18" decoding="async" data-nimg="1" class="w-[18px] h-[18px]" style="color:transparent" src="imgs/creeper3.png"><span>Installation</span></button>
+                            </li>
+                            <li><button type="button" data-scroll-target="#faq" class="font-normal text-[13px] flex gap-2 items-center justify-center py-2 px-4 rounded-lg transition-all duration-200 text-white/50 hover:text-white/80 hover:bg-white/[0.05] cursor-pointer"><img alt="" loading="lazy" width="18" height="18" decoding="async" data-nimg="1" class="w-[18px] h-[18px]" style="color:transparent" src="imgs/creeper1.png"><span>FAQ</span></button>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="flex items-center justify-end gap-2 sm:gap-4 flex-shrink-0 lg:w-[200px]"><button id="lang-btn" class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[12px] text-white/40 hover:text-white/70 hover:bg-white/[0.05] transition-all duration-200 cursor-pointer"><svg id="lang-flag" viewBox="0 0 512 512" class="w-5 h-5 rounded-sm overflow-hidden" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="512" height="512" fill="#bd3d44"></rect>
+                                <rect y="39.4" width="512" height="39.4" fill="#fff"></rect>
+                                <rect y="118.2" width="512" height="39.4" fill="#fff"></rect>
+                                <rect y="197" width="512" height="39.4" fill="#fff"></rect>
+                                <rect y="275.8" width="512" height="39.4" fill="#fff"></rect>
+                                <rect y="354.6" width="512" height="39.4" fill="#fff"></rect>
+                                <rect y="433.4" width="512" height="39.4" fill="#fff"></rect>
+                                <rect width="256" height="275.8" fill="#192f5d"></rect>
+                            </svg><span id="lang-label" class="font-semibold uppercase">EN</span></button>
+                        <div class="hidden md:block"><a href="download/Dungeon-Select-fabric.jar" download="Dungeon-Select-fabric.jar" class="font-minecraft inline-flex items-center justify-center gap-2 uppercase tracking-wide cursor-pointer select-none transition-all duration-200 border-b-[3px] active:border-b-0 active:border-t-[3px] active:translate-y-[2px] hover:brightness-110 bg-[#8B2020] text-white border-b-[#5a1010] active:border-t-[#b03030] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] hover:bg-[#a02828] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] px-4 py-1.5 text-[12px]">Download</a>
+                        </div><button class="lg:hidden p-2 text-white/70 hover:bg-white/[0.05] rounded-lg transition-colors"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5">
+                                <path d="M3 12h18M3 6h18M3 18h18"></path>
+                            </svg></button>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+            <div class="absolute inset-0 z-0"><img alt="DungeonSelect" loading="eager" decoding="async" data-nimg="fill" class="object-cover object-center" style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent" sizes="100vw" src="imgs/5.png">
+                <div class="absolute inset-0 bg-gradient-to-b from-[#050505]/60 via-[#050505]/40 to-[#050505]"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-[#050505]/50 via-transparent to-[#050505]/50"></div>
+                <div class="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-[#050505] to-transparent"></div>
+            </div>
+            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 w-full pt-28 pb-20">
+                <div class="flex flex-col items-center text-center">
+                    <div class="inline-flex items-center gap-3 px-4 py-2 mb-8 bg-[#1a0a0a]/60 backdrop-blur-sm border border-red/15" style="opacity:1;transform:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 text-red">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                        </svg><span class="font-minecraft text-[12px] text-red/90 uppercase tracking-widest">Action RPG
+                            Modpack</span><span class="text-[11px] text-white/20 font-mono">v1.0</span></div>
+                    <h1 class="font-minecraft text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[5.5rem] leading-[0.95] text-white mb-6 [text-shadow:0_0_40px_rgba(220,38,38,0.15),0_2px_0_rgba(0,0,0,0.8)]" style="opacity:1;transform:none">STEP INTO<br><span class="text-red [text-shadow:0_0_60px_rgba(220,38,38,0.3),0_2px_0_#5a1010]">DungeonSelect
+                        </span>
+                    </h1>
+                    <p class="text-white/40 text-[15px] sm:text-[16px] leading-relaxed max-w-lg mb-10" style="opacity:1;transform:none">Dive into countless dungeons teeming with dangerous
+                        monsters and powerful bosses. Gear up with legendary weapons and armor, level up your skills,
+                        and rise to every challenge like a true hero.</p>
+                    <div class="flex flex-col sm:flex-row items-center gap-4 mb-20" style="opacity:1;transform:none"><a href="download/Dungeon-Select-fabric.jar" download="Dungeon-Select-fabric.jar" class="font-minecraft inline-flex items-center justify-center gap-2 uppercase tracking-wide cursor-pointer select-none transition-all duration-200 border-b-[3px] active:border-b-0 active:border-t-[3px] active:translate-y-[2px] hover:brightness-110 bg-[#8B2020] text-white border-b-[#5a1010] active:border-t-[#b03030] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] hover:bg-[#a02828] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] px-7 py-2.5 text-[15px]">Download
+                            Now</a><a href="#about" class="font-minecraft inline-flex items-center justify-center gap-2 uppercase tracking-wide cursor-pointer select-none transition-all duration-200 border-b-[3px] active:border-b-0 active:border-t-[3px] active:translate-y-[2px] hover:brightness-110 bg-[#3a3a3a] text-white/90 border-b-[#252525] active:border-t-[#555] shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] hover:bg-[#444] hover:text-white px-7 py-2.5 text-[15px] ">Learn
+                            More</a></div>
+                    <div class="w-full max-w-5xl" style="opacity:1;transform:none">
+                        <div class="relative">
+                            <div class="relative rounded-lg overflow-hidden border border-white/[0.06] shadow-[0_30px_100px_rgba(0,0,0,0.7)]">
+                                <img alt="DungeonSelect Showcase" loading="lazy" width="1200" height="500" decoding="async" data-nimg="1" class="object-cover w-full h-[280px] sm:h-[340px] md:h-[400px]" style="color:transparent" src="imgs/10.png">
+                                <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-[#050505]/30">
+                                </div>
+                                <div class="absolute inset-0 bg-gradient-to-r from-[#050505]/40 via-transparent to-[#050505]/40">
+                                </div>
+                                <div class="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
+                                    <div class="flex items-end justify-between gap-4">
+                                        <div class="flex gap-3">
+                                            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border border-white/[0.08] shadow-lg">
+                                                <img alt="Dungeon" loading="lazy" width="160" height="160" decoding="async" data-nimg="1" class="object-cover w-full h-full" style="color:transparent" src="imgs/6.png">
+                                            </div>
+                                            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border border-white/[0.08] shadow-lg -ml-4 mt-2">
+                                                <img alt="Temple" loading="lazy" width="160" height="160" decoding="async" data-nimg="1" class="object-cover w-full h-full" style="color:transparent" src="imgs/8.png">
+                                            </div>
+                                            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border border-red/15 shadow-lg -ml-4 mt-4">
+                                                <img alt="Ruins" loading="lazy" width="160" height="160" decoding="async" data-nimg="1" class="object-cover w-full h-full" style="color:transparent" src="imgs/4.png">
+                                            </div>
+                                        </div>
+                                        <div class="text-right hidden sm:block">
+                                            <p class="font-minecraft text-[11px] text-red uppercase tracking-widest">
+                                                Endless Dungeons</p>
+                                            <p class="text-[11px] text-white/25 mt-1">Procedurally generated</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="absolute -top-3 -left-3 w-6 h-6 border-t-2 border-l-2 border-red/30"></div>
+                            <div class="absolute -top-3 -right-3 w-6 h-6 border-t-2 border-r-2 border-red/30"></div>
+                            <div class="absolute -bottom-3 -left-3 w-6 h-6 border-b-2 border-l-2 border-red/30"></div>
+                            <div class="absolute -bottom-3 -right-3 w-6 h-6 border-b-2 border-r-2 border-red/30"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="stats" class="relative py-20 md:py-28 border-t border-white/[0.04] overflow-hidden">
+            <div class="absolute inset-0 pointer-events-none"><img alt="" loading="lazy" decoding="async" data-nimg="fill" class="object-cover opacity-[0.04]" style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent" sizes="100vw" src="imgs/3.png">
+                <div class="absolute inset-0 bg-gradient-to-r from-[#050505] via-transparent to-[#050505]"></div>
+                <div class="absolute inset-0 bg-gradient-to-b from-[#050505] via-transparent to-[#050505]"></div>
+            </div>
+            <div class="relative max-w-5xl mx-auto px-4 sm:px-6">
+                <div style="opacity:1;transform:none">
+                    <p class="text-center text-[11px] font-semibold text-red/70 uppercase tracking-[0.25em] mb-12">
+                        Adventure in Numbers</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div style="opacity:1;transform:none">
+                        <div class="group relative rounded-xl border border-white/[0.06] bg-[#0a0a0a]/80 backdrop-blur-sm p-5 text-center hover:border-red/15 transition-all duration-300 overflow-hidden">
+                            <div class="absolute inset-0 bg-[image:repeating-linear-gradient(0deg,transparent,transparent_3px,rgba(255,255,255,0.01)_3px,rgba(255,255,255,0.01)_4px)] pointer-events-none">
+                            </div>
+                            <div class="relative">
+                                <div class="w-10 h-10 mx-auto mb-3 flex items-center justify-center text-red/50 group-hover:text-red transition-all duration-300">
+                                    <svg viewBox="0 0 24 24" class="w-6 h-6" fill="currentColor">
+                                        <path d="M3 3h2v2H3zM5 5h2v2H5zM7 3h2v2H7zM7 7h2v2H7zM9 5h2v4H9zM11 3h2v18h-2zM13 5h2v4h-2zM15 7h2v2h-2zM15 3h2v2h-2zM17 5h2v2h-2zM19 3h2v2h-2z">
+                                        </path>
+                                    </svg>
+                                </div><span class="block text-[1.75rem] sm:text-[2.25rem] font-bold text-white tracking-tight leading-none font-minecraft tabular-nums">∞</span><span class="block text-[10px] font-semibold text-white/25 uppercase tracking-[0.18em] mt-2">Generated
+                                    Dungeons</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="opacity:1;transform:none">
+                        <div class="group relative rounded-xl border border-white/[0.06] bg-[#0a0a0a]/80 backdrop-blur-sm p-5 text-center hover:border-red/15 transition-all duration-300 overflow-hidden">
+                            <div class="absolute inset-0 bg-[image:repeating-linear-gradient(0deg,transparent,transparent_3px,rgba(255,255,255,0.01)_3px,rgba(255,255,255,0.01)_4px)] pointer-events-none">
+                            </div>
+                            <div class="relative">
+                                <div class="w-10 h-10 mx-auto mb-3 flex items-center justify-center text-red/50 group-hover:text-red transition-all duration-300">
+                                    <svg viewBox="0 0 24 24" class="w-6 h-6" fill="currentColor">
+                                        <path d="M8 2h8v2H8zM6 4h2v2H6zM16 4h2v2h-2zM4 6h2v12H4zM18 6h2v12h-2zM6 8h12v2H6zM8 10h8v2H8zM6 18h2v2H6zM16 18h2v2h-2zM8 20h8v2H8z">
+                                        </path>
+                                    </svg>
+                                </div><span class="block text-[1.75rem] sm:text-[2.25rem] font-bold text-white tracking-tight leading-none font-minecraft tabular-nums">20+</span><span class="block text-[10px] font-semibold text-white/25 uppercase tracking-[0.18em] mt-2">Unique
+                                    Bosses</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="opacity:1;transform:none">
+                        <div class="group relative rounded-xl border border-white/[0.06] bg-[#0a0a0a]/80 backdrop-blur-sm p-5 text-center hover:border-red/15 transition-all duration-300 overflow-hidden">
+                            <div class="absolute inset-0 bg-[image:repeating-linear-gradient(0deg,transparent,transparent_3px,rgba(255,255,255,0.01)_3px,rgba(255,255,255,0.01)_4px)] pointer-events-none">
+                            </div>
+                            <div class="relative">
+                                <div class="w-10 h-10 mx-auto mb-3 flex items-center justify-center text-red/50 group-hover:text-red transition-all duration-300">
+                                    <svg viewBox="0 0 24 24" class="w-6 h-6" fill="currentColor">
+                                        <path d="M9 1h6v2H9zM7 3h2v2H7zM15 3h2v2h-2zM5 5h2v4H5zM17 5h2v4h-2zM7 5h10v2H7zM7 9h10v2H7zM5 9h2v2H5zM17 9h2v2h-2zM7 11h10v4H7zM9 15h6v2H9zM7 17h2v2H7zM15 17h2v2h-2zM9 19h6v2H9z">
+                                        </path>
+                                    </svg>
+                                </div><span class="block text-[1.75rem] sm:text-[2.25rem] font-bold text-white tracking-tight leading-none font-minecraft tabular-nums">100+</span><span class="block text-[10px] font-semibold text-white/25 uppercase tracking-[0.18em] mt-2">Weapons
+                                    &amp; Armor</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="opacity:1;transform:none">
+                        <div class="group relative rounded-xl border border-white/[0.06] bg-[#0a0a0a]/80 backdrop-blur-sm p-5 text-center hover:border-red/15 transition-all duration-300 overflow-hidden">
+                            <div class="absolute inset-0 bg-[image:repeating-linear-gradient(0deg,transparent,transparent_3px,rgba(255,255,255,0.01)_3px,rgba(255,255,255,0.01)_4px)] pointer-events-none">
+                            </div>
+                            <div class="relative">
+                                <div class="w-10 h-10 mx-auto mb-3 flex items-center justify-center text-red/50 group-hover:text-red transition-all duration-300">
+                                    <svg viewBox="0 0 24 24" class="w-6 h-6" fill="currentColor">
+                                        <path d="M10 2h4v2h-4zM8 4h2v2H8zM14 4h2v2h-2zM6 6h2v2H6zM16 6h2v2h-2zM4 8h2v2H4zM18 8h2v2h-2zM4 10h16v2H4zM6 12h12v2H6zM8 14h8v2H8zM10 16h4v2h-4zM11 18h2v4h-2z">
+                                        </path>
+                                    </svg>
+                                </div><span class="block text-[1.75rem] sm:text-[2.25rem] font-bold text-white tracking-tight leading-none font-minecraft tabular-nums">50+</span><span class="block text-[10px] font-semibold text-white/25 uppercase tracking-[0.18em] mt-2">Skills</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="about" class="py-24 md:py-36 border-t border-white/[0.04] relative overflow-hidden">
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-red/[0.03] rounded-full blur-[120px] pointer-events-none">
+            </div>
+            <div class="relative max-w-6xl mx-auto px-4 sm:px-6">
+                <div class="text-center mb-16">
+                    <div style="opacity:1;transform:none">
+                        <p class="text-[11px] font-semibold text-red/70 uppercase tracking-[0.25em] mb-4">About
+                            DungeonSelect
+                        </p>
+                    </div>
+                    <div style="opacity:1;transform:none">
+                        <h2 class="text-[1.75rem] sm:text-[2.25rem] md:text-[2.75rem] font-bold text-white leading-[1.1] tracking-tight mb-5">
+                            An immersive RPG<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-red to-[#ff6b6b]">experience
+                                awaits</span></h2>
+                    </div>
+                    <div style="opacity:1;transform:none">
+                        <p class="text-white/35 text-[15px] leading-relaxed max-w-2xl mx-auto">Welcome to DungeonSelect
+                            ,
+                            an
+                            immersive RPG experience focused on dungeon crawling, monster slaying, and epic progression.
+                            Explore a vast world filled with procedurally generated dungeons, each crawling with
+                            enemies, traps, and rare loot. Face unique bosses guarding powerful treasures, and test your
+                            strength in every battle.</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch">
+                    <div style="opacity:1;transform:none">
+                        <div class="grid grid-cols-2 gap-3 h-full">
+                            <div class="col-span-2 relative rounded-xl overflow-hidden border border-white/[0.06] flex-1 min-h-[200px]">
+                                <img alt="Dungeon" loading="lazy" decoding="async" data-nimg="fill" class="object-cover" style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent" sizes="(max-width: 1024px) 100vw, 50vw" src="imgs/2.png">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent">
+                                </div>
+                                <div class="absolute bottom-3 left-3 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-red animate-pulse"></span><span class="text-[10px] text-white/60 uppercase tracking-wider font-semibold">Dungeon
+                                        Crawling</span></div>
+                            </div>
+                            <div class="relative rounded-xl overflow-hidden border border-white/[0.06] h-36"><img alt="Boss" loading="lazy" decoding="async" data-nimg="fill" class="object-cover" style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent" sizes="(max-width: 1024px) 50vw, 25vw" src="imgs/7.png">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                                <div class="absolute bottom-2 left-2"><span class="text-[9px] text-white/50 uppercase tracking-wider font-semibold">Boss
+                                        Fight</span></div>
+                            </div>
+                            <div class="relative rounded-xl overflow-hidden border border-white/[0.06] h-36"><img alt="Loot" loading="lazy" decoding="async" data-nimg="fill" class="object-cover" style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent" sizes="(max-width: 1024px) 50vw, 25vw" src="imgs/5.png">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                                <div class="absolute bottom-2 left-2"><span class="text-[9px] text-white/50 uppercase tracking-wider font-semibold">Rare
+                                        Loot</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col justify-between gap-3 h-full">
+                        <div class="flex-1" style="opacity:1;transform:none">
+                            <div class="group flex gap-4 p-5 rounded-xl border border-white/[0.06] bg-[#0a0a0a] hover:border-red/15 transition-all duration-300 h-full">
+                                <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-red/[0.06] flex items-center justify-center text-red/50 group-hover:text-red transition-all duration-300">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+                                        <path d="M15 3h6v6"></path>
+                                        <path d="M10 14L21 3"></path>
+                                        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-[14px] font-semibold text-white mb-1 group-hover:text-red transition-colors duration-300">
+                                        Dungeon Crawling</h3>
+                                    <p class="text-[13px] text-white/30 leading-relaxed">Procedurally generated dungeons
+                                        with enemies, traps and rare loot. Every exploration is a new adventure — never
+                                        repeat the same dungeon.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-1" style="opacity:1;transform:none">
+                            <div class="group flex gap-4 p-5 rounded-xl border border-white/[0.06] bg-[#0a0a0a] hover:border-red/15 transition-all duration-300 h-full">
+                                <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-red/[0.06] flex items-center justify-center text-red/50 group-hover:text-red transition-all duration-300">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+                                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-[14px] font-semibold text-white mb-1 group-hover:text-red transition-colors duration-300">
+                                        Hero Progression</h3>
+                                    <p class="text-[13px] text-white/30 leading-relaxed">Level up your skills, unlock
+                                        abilities and equip legendary weapons, enchanted armor and mystical artifacts to
+                                        survive.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-1" style="opacity:1;transform:none">
+                            <div class="group flex gap-4 p-5 rounded-xl border border-white/[0.06] bg-[#0a0a0a] hover:border-red/15 transition-all duration-300 h-full">
+                                <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-red/[0.06] flex items-center justify-center text-red/50 group-hover:text-red transition-all duration-300">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                                        <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                                        <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-[14px] font-semibold text-white mb-1 group-hover:text-red transition-colors duration-300">
+                                        Action Combat</h3>
+                                    <p class="text-[13px] text-white/30 leading-relaxed">Face dangerous monsters and
+                                        powerful bosses with intense combat mechanics that demand real skill and
+                                        strategy.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="highlights" class="py-24 md:py-36 border-t border-white/[0.04]">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6">
+                <div style="opacity:1;transform:none">
+                    <p class="text-center text-[11px] font-semibold text-red/70 uppercase tracking-[0.25em] mb-4">
+                        Highlights</p>
+                </div>
+                <div style="opacity:1;transform:none">
+                    <h2 class="text-center text-[1.75rem] sm:text-[2.25rem] md:text-[2.75rem] font-bold text-white leading-[1.1] tracking-tight mb-4">
+                        What Awaits You</h2>
+                </div>
+                <div style="opacity:1;transform:none">
+                    <p class="text-center text-white/35 text-[15px] leading-relaxed max-w-lg mx-auto mb-16">Legendary
+                        weapons, enchanted armor, and mystical artifacts will be your tools to survive. Prepare to
+                        fight, explore, and conquer.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <div style="opacity:1;transform:none">
+                        <div class="group relative rounded-2xl overflow-hidden border border-white/[0.06] bg-[#0a0a0a] hover:border-red/20 transition-all duration-500">
+                            <div class="relative aspect-[16/10] overflow-hidden"><img alt="Endless Dungeons" loading="lazy" width="500" height="312" decoding="async" data-nimg="1" class="object-cover w-full h-full" style="color:transparent" src="imgs/6.png">
+                                <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/20 to-transparent">
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-[16px] font-bold text-white mb-2 group-hover:text-red transition-colors duration-300">
+                                    Endless Dungeons</h3>
+                                <p class="text-[13px] text-white/35 leading-relaxed">Every dungeon is procedurally
+                                    generated with unique layouts, varied enemies and rare rewards. No exploration is
+                                    ever the same.</p>
+                            </div>
+                            <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-red/0 to-transparent group-hover:via-red/40 transition-all duration-500">
+                            </div>
+                        </div>
+                    </div>
+                    <div style="opacity:1;transform:none">
+                        <div class="group relative rounded-2xl overflow-hidden border border-white/[0.06] bg-[#0a0a0a] hover:border-red/20 transition-all duration-500">
+                            <div class="relative aspect-[16/10] overflow-hidden"><img alt="Legendary Arsenal" loading="lazy" width="500" height="312" decoding="async" data-nimg="1" class="object-cover w-full h-full" style="color:transparent" src="imgs/8.png">
+                                <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/20 to-transparent">
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-[16px] font-bold text-white mb-2 group-hover:text-red transition-colors duration-300">
+                                    Legendary Arsenal</h3>
+                                <p class="text-[13px] text-white/35 leading-relaxed">Collect legendary weapons,
+                                    enchanted armor and mystical artifacts. Each item has unique attributes that change
+                                    your combat style.</p>
+                            </div>
+                            <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-red/0 to-transparent group-hover:via-red/40 transition-all duration-500">
+                            </div>
+                        </div>
+                    </div>
+                    <div style="opacity:1;transform:none">
+                        <div class="group relative rounded-2xl overflow-hidden border border-white/[0.06] bg-[#0a0a0a] hover:border-red/20 transition-all duration-500">
+                            <div class="relative aspect-[16/10] overflow-hidden"><img alt="Brutal Challenges" loading="lazy" width="500" height="312" decoding="async" data-nimg="1" class="object-cover w-full h-full" style="color:transparent" src="imgs/9.png">
+                                <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/20 to-transparent">
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-[16px] font-bold text-white mb-2 group-hover:text-red transition-colors duration-300">
+                                    Brutal Challenges</h3>
+                                <p class="text-[13px] text-white/35 leading-relaxed">Deadly traps, monster hordes and
+                                    complex puzzles. Every room is a skill test that rewards the brave.</p>
+                            </div>
+                            <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-red/0 to-transparent group-hover:via-red/40 transition-all duration-500">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="opacity:1;transform:none">
+                    <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div class="group relative rounded-2xl overflow-hidden border border-white/[0.06] bg-[#0a0a0a] hover:border-red/20 transition-all duration-500">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-0">
+                                <div class="relative aspect-[4/3] sm:aspect-auto sm:min-h-[240px] overflow-hidden"><img alt="Flying Boss" loading="lazy" decoding="async" data-nimg="fill" class="object-cover" style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent" sizes="(max-width: 768px) 100vw, 50vw" src="imgs/3.png">
+                                    <div class="absolute inset-0 bg-gradient-to-r from-transparent to-[#0a0a0a]/80 hidden sm:block">
+                                    </div>
+                                    <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] to-transparent sm:hidden">
+                                    </div>
+                                </div>
+                                <div class="p-6 flex flex-col justify-center"><span class="text-[10px] font-semibold text-red uppercase tracking-[0.2em] mb-2">Bosses</span>
+                                    <h3 class="text-[16px] font-bold text-white mb-2">Treasure Guardians</h3>
+                                    <p class="text-[13px] text-white/35 leading-relaxed">Unique bosses guard powerful
+                                        treasures with exclusive combat mechanics, multiple phases and legendary loot.
+                                        Test your strength in every battle.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group relative rounded-2xl overflow-hidden border border-white/[0.06] bg-[#0a0a0a] hover:border-red/20 transition-all duration-500">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-0">
+                                <div class="relative aspect-[4/3] sm:aspect-auto sm:min-h-[240px] overflow-hidden"><img alt="Exploration" loading="lazy" decoding="async" data-nimg="fill" class="object-cover" style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent" sizes="(max-width: 768px) 100vw, 50vw" src="imgs/1.png">
+                                    <div class="absolute inset-0 bg-gradient-to-r from-transparent to-[#0a0a0a]/80 hidden sm:block">
+                                    </div>
+                                    <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] to-transparent sm:hidden">
+                                    </div>
+                                </div>
+                                <div class="p-6 flex flex-col justify-center"><span class="text-[10px] font-semibold text-red uppercase tracking-[0.2em] mb-2">Exploration</span>
+                                    <h3 class="text-[16px] font-bold text-white mb-2">Vast World</h3>
+                                    <p class="text-[13px] text-white/35 leading-relaxed">Explore dangerous biomes,
+                                        discover hidden dungeons and uncover ancient secrets scattered across an immense
+                                        world full of mysteries.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="installation" class="py-24 md:py-36 border-t border-white/[0.04]">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6">
+                <div style="opacity:1;transform:none">
+                    <p class="text-center text-[11px] font-semibold text-red/70 uppercase tracking-[0.25em] mb-4">How to
+                        Install</p>
+                </div>
+                <div style="opacity:1;transform:none">
+                    <h2 class="text-center text-[1.75rem] sm:text-[2.25rem] md:text-[2.75rem] font-bold text-white leading-[1.1] tracking-tight mb-4">
+                        Get Started in Minutes</h2>
+                </div>
+                <div style="opacity:1;transform:none">
+                    <p class="text-center text-white/35 text-[15px] leading-relaxed max-w-md mx-auto mb-16">Follow these
+                        simple steps to install the DungeonSelect modpack and begin your adventure.</p>
+                </div>
+                <div class="relative max-w-2xl mx-auto">
+                    <div style="opacity:1;transform:none">
+                        <div class="relative flex gap-6 md:gap-8 pb-12 last:pb-0">
+                            <div class="relative flex flex-col items-center">
+                                <div class="relative z-10 flex items-center justify-center w-12 h-12 rounded-xl bg-red/10 border border-red/20 text-red flex-shrink-0">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+                                        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path>
+                                        <polyline points="7 10 12 15 17 10"></polyline>
+                                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                                    </svg><span class="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-red text-white text-[10px] font-bold flex items-center justify-center shadow-lg shadow-red/30">1</span>
+                                </div>
+                                <div class="w-[1px] flex-1 mt-3 bg-gradient-to-b from-red/20 via-red/10 to-transparent">
+                                </div>
+                            </div>
+                            <div class="flex-1 min-w-0 pt-1">
+                                <div class="rounded-xl border border-white/[0.06] bg-[#0a0a0a] hover:border-red/15 transition-all duration-300 p-5 md:p-6">
+                                    <h3 class="text-[16px] md:text-[18px] font-bold text-white mb-2">Download the Package
+                                    </h3>
+                                    <p class="text-[13px] text-white/40 leading-relaxed mb-3">Download the DungeonSelect
+                                        .zip from our download section.</p>
+                                    <div class="inline-flex items-center gap-2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 text-red/70 flex-shrink-0">
+                                            <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
+                                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                        </svg><span class="text-[12px] text-red/70">The package includes the mod and Fabric
+                                            installer for Minecraft 1.21.11</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="opacity:1;transform:none">
+                        <div class="relative flex gap-6 md:gap-8 pb-12 last:pb-0">
+                            <div class="relative flex flex-col items-center">
+                                <div class="relative z-10 flex items-center justify-center w-12 h-12 rounded-xl bg-red/10 border border-red/20 text-red flex-shrink-0">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+                                        <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z">
+                                        </path>
+                                    </svg><span class="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-red text-white text-[10px] font-bold flex items-center justify-center shadow-lg shadow-red/30">2</span>
+                                </div>
+                                <div class="w-[1px] flex-1 mt-3 bg-gradient-to-b from-red/20 via-red/10 to-transparent">
+                                </div>
+                            </div>
+                            <div class="flex-1 min-w-0 pt-1">
+                                <div class="rounded-xl border border-white/[0.06] bg-[#0a0a0a] hover:border-red/15 transition-all duration-300 p-5 md:p-6">
+                                    <h3 class="text-[16px] md:text-[18px] font-bold text-white mb-2">Install Fabric
+                                    </h3>
+                                    <p class="text-[13px] text-white/40 leading-relaxed mb-3">Extract the .zip and run
+                                        the Fabric installer. Select Minecraft 1.21.11 when prompted.
+                                    </p>
+                                    <div class="inline-flex items-center gap-2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 text-red/70 flex-shrink-0">
+                                            <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
+                                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                        </svg><span class="text-[12px] text-red/70">Make sure to select the correct
+                                            Minecraft version</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="opacity:1;transform:none">
+                        <div class="relative flex gap-6 md:gap-8 pb-12 last:pb-0">
+                            <div class="relative flex flex-col items-center">
+                                <div class="relative z-10 flex items-center justify-center w-12 h-12 rounded-xl bg-red/10 border border-red/20 text-red flex-shrink-0">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+                                        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path>
+                                        <polyline points="7 10 12 15 17 10"></polyline>
+                                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                                    </svg><span class="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-red text-white text-[10px] font-bold flex items-center justify-center shadow-lg shadow-red/30">3</span>
+                                </div>
+                                <div class="w-[1px] flex-1 mt-3 bg-gradient-to-b from-red/20 via-red/10 to-transparent">
+                                </div>
+                            </div>
+                            <div class="flex-1 min-w-0 pt-1">
+                                <div class="rounded-xl border border-white/[0.06] bg-[#0a0a0a] hover:border-red/15 transition-all duration-300 p-5 md:p-6">
+                                    <h3 class="text-[16px] md:text-[18px] font-bold text-white mb-2">Install the Mod
+                                    </h3>
+                                    <p class="text-[13px] text-white/40 leading-relaxed mb-3">Place the DungeonSelect
+                                        .jar file from the extracted folder into your mods folder.</p>
+                                    <div class="inline-flex items-center gap-2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 text-red/70 flex-shrink-0">
+                                            <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
+                                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                        </svg><span class="text-[12px] text-red/70">Or press Win+R and type
+                                            %appdata%\.minecraft\mods</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="opacity:1;transform:none">
+                        <div class="relative flex gap-6 md:gap-8 pb-12 last:pb-0">
+                            <div class="relative flex flex-col items-center">
+                                <div class="relative z-10 flex items-center justify-center w-12 h-12 rounded-xl bg-red/10 border border-red/20 text-red flex-shrink-0">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+                                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                    </svg><span class="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-red text-white text-[10px] font-bold flex items-center justify-center shadow-lg shadow-red/30">4</span>
+                                </div>
+                            </div>
+                            <div class="flex-1 min-w-0 pt-1">
+                                <div class="rounded-xl border border-white/[0.06] bg-[#0a0a0a] hover:border-red/15 transition-all duration-300 p-5 md:p-6">
+                                    <h3 class="text-[16px] md:text-[18px] font-bold text-white mb-2">Launch Minecraft
+                                    </h3>
+                                    <p class="text-[13px] text-white/40 leading-relaxed mb-3">Open the Minecraft
+                                        Launcher, select the Fabric profile, and click Play!</p>
+                                    <div class="inline-flex items-center gap-2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 text-red/70 flex-shrink-0">
+                                            <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
+                                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                        </svg><span class="text-[12px] text-red/70">Make sure you have enough RAM
+                                            allocated (4GB+ recommended)</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="download" class="relative py-24 md:py-36 border-t border-white/[0.04] overflow-hidden">
+            <div class="absolute inset-0 z-0"><img alt="Dungeon Background" loading="lazy" decoding="async" data-nimg="fill" class="object-cover object-center opacity-20" style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent" sizes="100vw" src="imgs/4.png">
+                <div class="absolute inset-0 bg-gradient-to-b from-[#050505] via-[#050505]/80 to-[#050505]"></div>
+                <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(220,38,38,0.08),transparent_70%)]">
+                </div>
+            </div>
+            <div class="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 text-center">
+                <div style="opacity:1;transform:none">
+                    <p class="text-[11px] font-semibold text-red/70 uppercase tracking-[0.25em] mb-4">Your Legend Starts
+                        Here</p>
+                </div>
+                <div style="opacity:1;transform:none">
+                    <h2 class="text-[1.75rem] sm:text-[2.25rem] md:text-[3rem] font-bold text-white leading-[1.1] tracking-tight mb-5">
+                        Prepare to Fight<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-red to-[#ff6b6b]">and
+                            Conquer</span></h2>
+                </div>
+                <div style="opacity:1;transform:none">
+                    <p class="text-white/35 text-[15px] leading-relaxed max-w-md mx-auto mb-10">Download DungeonSelect
+                        for
+                        free and dive into a world of dungeons, monsters and legendary rewards. Your epic adventure
+                        starts now.</p>
+                </div>
+                <div style="opacity:1;transform:none">
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4"><a href="download/Dungeon-Select-fabric.jar" download="Dungeon-Select-fabric.jar
+" class="font-minecraft inline-flex items-center justify-center gap-2 uppercase tracking-wide cursor-pointer select-none transition-all duration-200 border-b-[3px] active:border-b-0 active:border-t-[3px] active:translate-y-[2px] hover:brightness-110 bg-[#8B2020] text-white border-b-[#5a1010] active:border-t-[#b03030] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] hover:bg-[#a02828] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] px-7 py-2.5 text-[15px]"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+                                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>Free Download</a></div>
+                </div>
+                <div style="opacity:1;transform:none">
+                    <div class="mt-12 flex items-center justify-center gap-8 text-center">
+                        <div><span class="text-[18px] font-bold text-white">1.21.11</span>
+                            <p class="text-[10px] text-white/25 uppercase tracking-wider mt-1">MC Version</p>
+                        </div>
+                        <div class="w-[1px] h-8 bg-white/[0.06]"></div>
+                        <div><span class="text-[18px] font-bold text-white">Fabric</span>
+                            <p class="text-[10px] text-white/25 uppercase tracking-wider mt-1">Mod Loader</p>
+                        </div>
+                        <div class="w-[1px] h-8 bg-white/[0.06]"></div>
+                        <div><span class="text-[18px] font-bold text-white">Free</span>
+                            <p class="text-[10px] text-white/25 uppercase tracking-wider mt-1">Forever</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="faq" class="py-24 md:py-36 border-t border-white/[0.04]">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6">
+                <div style="opacity:1;transform:none">
+                    <p class="text-center text-[11px] font-semibold text-red/70 uppercase tracking-[0.25em] mb-4">
+                        Frequently Asked Questions</p>
+                </div>
+                <div style="opacity:1;transform:none">
+                    <h2 class="text-center text-[1.75rem] sm:text-[2.25rem] md:text-[2.75rem] font-bold text-white leading-[1.1] tracking-tight mb-4">
+                        Common Questions</h2>
+                </div>
+                <div style="opacity:1;transform:none">
+                    <p class="text-center text-white/35 text-[15px] leading-relaxed max-w-md mx-auto mb-14">Find answers
+                        to the most common questions about the DungeonSelect modpack.</p>
+                </div>
+                <div class="space-y-3" id="faq-accordion">
+                    <div style="opacity:1;transform:none">
+                        <div class="faq-item border rounded-xl transition-all duration-300 border-white/[0.06] bg-[#0a0a0a] hover:border-white/[0.1]">
+                            <button class="faq-btn w-full flex items-center justify-between gap-4 p-5 md:p-6 text-left cursor-pointer">
+                                <span class="text-[14px] md:text-[15px] font-semibold transition-colors duration-200 text-white/70">Which
+                                    Minecraft version is compatible?</span>
+                                <div class="faq-icon flex-shrink-0 w-6 h-6 rounded-md flex items-center justify-center transition-all duration-300 bg-white/[0.06] text-white/40">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="w-3.5 h-3.5">
+                                        <path d="M12 5v14M5 12h14"></path>
+                                    </svg>
+                                </div>
+                            </button>
+                            <div class="faq-answer" style="display:none;overflow:hidden">
+                                <p class="px-5 md:px-6 pb-5 text-[13px] text-white/40 leading-relaxed">DungeonSelect is
+                                    compatible with Minecraft 1.21.11 using the Fabric mod loader. The download package
+                                    includes the Fabric installer for the correct version.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="opacity:1;transform:none">
+                        <div class="faq-item border rounded-xl transition-all duration-300 border-white/[0.06] bg-[#0a0a0a] hover:border-white/[0.1]">
+                            <button class="faq-btn w-full flex items-center justify-between gap-4 p-5 md:p-6 text-left cursor-pointer">
+                                <span class="text-[14px] md:text-[15px] font-semibold transition-colors duration-200 text-white/70">Is
+                                    the modpack free?</span>
+                                <div class="faq-icon flex-shrink-0 w-6 h-6 rounded-md flex items-center justify-center transition-all duration-300 bg-white/[0.06] text-white/40">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="w-3.5 h-3.5">
+                                        <path d="M12 5v14M5 12h14"></path>
+                                    </svg>
+                                </div>
+                            </button>
+                            <div class="faq-answer" style="display:none;overflow:hidden">
+                                <p class="px-5 md:px-6 pb-5 text-[13px] text-white/40 leading-relaxed">Yes! DungeonSelect
+                                    is completely free to download and play. Simply download the .jar package from
+                                    our download section, install Fabric, and place the mod in your Minecraft mods folder.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="opacity:1;transform:none">
+                        <div class="faq-item border rounded-xl transition-all duration-300 border-white/[0.06] bg-[#0a0a0a] hover:border-white/[0.1]">
+                            <button class="faq-btn w-full flex items-center justify-between gap-4 p-5 md:p-6 text-left cursor-pointer">
+                                <span class="text-[14px] md:text-[15px] font-semibold transition-colors duration-200 text-white/70">Can
+                                    I use it with other mods?</span>
+                                <div class="faq-icon flex-shrink-0 w-6 h-6 rounded-md flex items-center justify-center transition-all duration-300 bg-white/[0.06] text-white/40">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="w-3.5 h-3.5">
+                                        <path d="M12 5v14M5 12h14"></path>
+                                    </svg>
+                                </div>
+                            </button>
+                            <div class="faq-answer" style="display:none;overflow:hidden">
+                                <p class="px-5 md:px-6 pb-5 text-[13px] text-white/40 leading-relaxed">DungeonSelect is
+                                    designed to be compatible with most Fabric mods. However, some mods that
+                                    significantly alter world generation or combat systems may conflict. We recommend
+                                    testing carefully before combining with other mods.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="opacity:1;transform:none">
+                        <div class="faq-item border rounded-xl transition-all duration-300 border-white/[0.06] bg-[#0a0a0a] hover:border-white/[0.1]">
+                            <button class="faq-btn w-full flex items-center justify-between gap-4 p-5 md:p-6 text-left cursor-pointer">
+                                <span class="text-[14px] md:text-[15px] font-semibold transition-colors duration-200 text-white/70">Are
+                                    dungeons always different?</span>
+                                <div class="faq-icon flex-shrink-0 w-6 h-6 rounded-md flex items-center justify-center transition-all duration-300 bg-white/[0.06] text-white/40">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="w-3.5 h-3.5">
+                                        <path d="M12 5v14M5 12h14"></path>
+                                    </svg>
+                                </div>
+                            </button>
+                            <div class="faq-answer" style="display:none;overflow:hidden">
+                                <p class="px-5 md:px-6 pb-5 text-[13px] text-white/40 leading-relaxed">Yes! All dungeons
+                                    are procedurally generated, meaning each one has a unique layout, enemy placement,
+                                    traps, and loot. No two dungeons are alike — you'll never explore the same dungeon
+                                    twice.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="opacity:1;transform:none">
+                        <div class="faq-item border rounded-xl transition-all duration-300 border-white/[0.06] bg-[#0a0a0a] hover:border-white/[0.1]">
+                            <button class="faq-btn w-full flex items-center justify-between gap-4 p-5 md:p-6 text-left cursor-pointer">
+                                <span class="text-[14px] md:text-[15px] font-semibold transition-colors duration-200 text-white/70">How
+                                    do I report bugs or suggest features?</span>
+                                <div class="faq-icon flex-shrink-0 w-6 h-6 rounded-md flex items-center justify-center transition-all duration-300 bg-white/[0.06] text-white/40">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="w-3.5 h-3.5">
+                                        <path d="M12 5v14M5 12h14"></path>
+                                    </svg>
+                                </div>
+                            </button>
+                            <div class="faq-answer" style="display:none;overflow:hidden">
+                                <p class="px-5 md:px-6 pb-5 text-[13px] text-white/40 leading-relaxed">Use our support channels to report bugs or suggest features. We read all feedback and strive to improve with every update.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="opacity:1;transform:none">
+                        <div class="faq-item border rounded-xl transition-all duration-300 border-white/[0.06] bg-[#0a0a0a] hover:border-white/[0.1]">
+                            <button class="faq-btn w-full flex items-center justify-between gap-4 p-5 md:p-6 text-left cursor-pointer">
+                                <span class="text-[14px] md:text-[15px] font-semibold transition-colors duration-200 text-white/70">Does
+                                    it work on multiplayer servers?</span>
+                                <div class="faq-icon flex-shrink-0 w-6 h-6 rounded-md flex items-center justify-center transition-all duration-300 bg-white/[0.06] text-white/40">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="w-3.5 h-3.5">
+                                        <path d="M12 5v14M5 12h14"></path>
+                                    </svg>
+                                </div>
+                            </button>
+                            <div class="faq-answer" style="display:none;overflow:hidden">
+                                <p class="px-5 md:px-6 pb-5 text-[13px] text-white/40 leading-relaxed">Yes! DungeonSelect
+                                    supports multiplayer. Both the server and all clients need to have the mod
+                                    installed. The dungeon generation is synchronized between players, so you can
+                                    explore and fight together in real-time.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer class="w-full px-4 sm:px-6 pb-8 pt-4">
+            <div class="max-w-5xl mx-auto">
+                <div class="rounded-2xl border border-white/[0.06] bg-white/[0.02] px-6 sm:px-8 py-8 md:py-10">
+                    <div class="flex flex-col md:flex-row gap-10 md:gap-0 md:justify-between">
+                        <div class="flex flex-col justify-between gap-6">
+                            <div><a href="#" class="flex items-center select-none mb-4" style="text-decoration:none">
+                                    <span style="
+                                        font-family: 'minecraft', monospace;
+                                        font-size: 16px;
+                                        font-weight: 700;
+                                        letter-spacing: 0.04em;
+                                        background: linear-gradient(135deg, #f5c842 0%, #d4a017 40%, #f5c842 70%, #c4910f 100%);
+                                        -webkit-background-clip: text;
+                                        -webkit-text-fill-color: transparent;
+                                        background-clip: text;
+                                        filter: drop-shadow(0 0 5px rgba(212,160,23,0.4));
+                                        line-height: 1;
+                                        text-transform: uppercase;
+                                    ">DUNGEON<span style="
+                                        background: linear-gradient(135deg, #ffffff 0%, #e8d5a0 40%, #d4a017 100%);
+                                        -webkit-background-clip: text;
+                                        -webkit-text-fill-color: transparent;
+                                        background-clip: text;
+                                    ">DUNGEON</span></span>
+                                </a>
+                                <p class="text-[11px] text-white/20 max-w-[200px] leading-relaxed">An action RPG modpack
+                                    for Minecraft with endless dungeons, epic bosses and legendary progression.</p>
+                            </div>
+                            <p class="text-[10px] text-white/15">© 2026 DungeonSelect All rights reserved.</p>
+                        </div>
+                        <div class="flex gap-12 md:gap-16">
+                            <div>
+                                <h4 class="text-[10px] font-semibold text-white/40 uppercase tracking-[0.18em] mb-4">
+                                    Modpack</h4>
+                                <ul class="space-y-2.5">
+                                    <li><a href="download/Dungeon-Select-fabric.jar" class="text-[12px] text-white/30 hover:text-white/60 transition-colors">Download</a>
+                                    </li>
+                                    <li><a href="#installation" class="text-[12px] text-white/30 hover:text-white/60 transition-colors">Installation</a>
+                                    </li>
+                                    <li><a href="#" class="text-[12px] text-white/30 hover:text-white/60 transition-colors">Changelog</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-[10px] font-semibold text-white/40 uppercase tracking-[0.18em] mb-4">
+                                    Info</h4>
+                                <ul class="space-y-2.5">
+                                    <li><a href="#faq" class="text-[12px] text-white/30 hover:text-white/60 transition-colors">FAQ</a>
+                                    </li>
+                                    <li><a href="#about" class="text-[12px] text-white/30 hover:text-white/60 transition-colors">About</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer><button class="fixed bottom-6 right-6 z-50 group overflow-hidden flex items-center justify-center w-11 h-11 rounded-lg bg-[#8B2020] border border-[#5a1010] transition-all duration-300 cursor-pointer opacity-0 translate-y-4 pointer-events-none" aria-label="Voltar ao topo">
+            <div class="transition-all duration-500 ease-in-out translate-y-0 opacity-100 group-hover:-translate-y-0.5">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4.5 h-4.5 text-white">
+                    <path d="M12 19V5"></path>
+                    <path d="M5 12l7-7 7 7"></path>
+                </svg>
+            </div>
+            <div class="absolute bottom-0 w-1.5 h-3 bg-gradient-to-t from-red/50 to-transparent rounded-full blur-[2px] transition-all duration-300 opacity-0 translate-y-8">
+            </div>
+        </button>
+    </main><!--$--><!--/$-->
+    <script src="_next/static/chunks/15dpxuqklq~~q.js" id="_R_" async=""></script>
+    <script>(self.__next_f = self.__next_f || []).push([0])</script>
+    <script>self.__next_f.push([1, "1:\"$Sreact.fragment\"\n2:I[52634,[\"/_next/static/chunks/109ek933tv7sr.js\",\"/_next/static/chunks/0e0597~-2_0cj.js\"],\"Providers\"]\n3:I[44888,[\"/_next/static/chunks/109ek933tv7sr.js\",\"/_next/static/chunks/0e0597~-2_0cj.js\"],\"default\"]\n4:I[35968,[\"/_next/static/chunks/109ek933tv7sr.js\",\"/_next/static/chunks/0e0597~-2_0cj.js\"],\"default\"]\n5:I[99164,[\"/_next/static/chunks/109ek933tv7sr.js\",\"/_next/static/chunks/0e0597~-2_0cj.js\"],\"ClientPageRoot\"]\n6:I[25784,[\"/_next/static/chunks/109ek933tv7sr.js\",\"/_next/static/chunks/0e0597~-2_0cj.js\",\"/_next/static/chunks/0w2hcfkj.j1ij.js\"],\"default\"]\n9:I[59136,[\"/_next/static/chunks/109ek933tv7sr.js\",\"/_next/static/chunks/0e0597~-2_0cj.js\"],\"OutletBoundary\"]\na:\"$Sreact.suspense\"\nd:I[59136,[\"/_next/static/chunks/109ek933tv7sr.js\",\"/_next/static/chunks/0e0597~-2_0cj.js\"],\"ViewportBoundary\"]\nf:I[59136,[\"/_next/static/chunks/109ek933tv7sr.js\",\"/_next/static/chunks/0e0597~-2_0cj.js\"],\"MetadataBoundary\"]\n11:I[30236,[\"/_next/static/chunks/109ek933tv7sr.js\",\"/_next/static/chunks/0e0597~-2_0cj.js\"],\"default\",1]\n:HL[\"/_next/static/chunks/13igt_-ip_gy3.css\",\"style\"]\n:HL[\"/_next/static/media/797e433ab948586e-s.p.09zddjkbdep5a.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n:HL[\"/_next/static/media/caa3a2e1cccd8315-s.p.09~u27dqhyhd6.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n:HL[\"/_next/static/media/minecraft-s.p.0lmv.wzzbb7tf.ttf\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/ttf\"}]\n"])</script>
+    <script>self.__next_f.push([1, "0:{\"P\":null,\"c\":[\"\",\"\"],\"q\":\"\",\"i\":false,\"f\":[[[\"\",{\"children\":[\"(homepage)\",{\"children\":[\"__PAGE__\",{}]}]},\"$undefined\",\"$undefined\",16],[[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/chunks/13igt_-ip_gy3.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}],[\"$\",\"script\",\"script-0\",{\"src\":\"/_next/static/chunks/109ek933tv7sr.js\",\"async\":true,\"nonce\":\"$undefined\"}],[\"$\",\"script\",\"script-1\",{\"src\":\"/_next/static/chunks/0e0597~-2_0cj.js\",\"async\":true,\"nonce\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"pt-BR\",\"className\":\"geist_a71539c9-module__T19VSG__variable geist_mono_8d43a2aa-module__8Li5zG__variable minecraft_e652a4ee-module__Sqf-KW__variable antialiased\",\"children\":[\"$\",\"body\",null,{\"className\":\"min-h-screen flex flex-col bg-background text-foreground\",\"children\":[\"$\",\"$L2\",null,{\"children\":[\"$\",\"$L3\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L4\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[[\"$\",\"title\",null,{\"children\":\"404: This page could not be found.\"}],[\"$\",\"div\",null,{\"style\":{\"fontFamily\":\"system-ui,\\\"Segoe UI\\\",Roboto,Helvetica,Arial,sans-serif,\\\"Apple Color Emoji\\\",\\\"Segoe UI Emoji\\\"\",\"height\":\"100vh\",\"textAlign\":\"center\",\"display\":\"flex\",\"flexDirection\":\"column\",\"alignItems\":\"center\",\"justifyContent\":\"center\"},\"children\":[\"$\",\"div\",null,{\"children\":[[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\"}}],[\"$\",\"h1\",null,{\"className\":\"next-error-h1\",\"style\":{\"display\":\"inline-block\",\"margin\":\"0 20px 0 0\",\"padding\":\"0 23px 0 0\",\"fontSize\":24,\"fontWeight\":500,\"verticalAlign\":\"top\",\"lineHeight\":\"49px\"},\"children\":404}],[\"$\",\"div\",null,{\"style\":{\"display\":\"inline-block\"},\"children\":[\"$\",\"h2\",null,{\"style\":{\"fontSize\":14,\"fontWeight\":400,\"lineHeight\":\"49px\",\"margin\":0},\"children\":\"This page could not be found.\"}]}]]}]}]],[]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]}]}]}]]}],{\"children\":[[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L3\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L4\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[[\"$\",\"title\",null,{\"children\":\"404: This page could not be found.\"}],[\"$\",\"div\",null,{\"style\":\"$0:f:0:1:0:props:children:1:props:children:props:children:props:children:props:notFound:0:1:props:style\",\"children\":[\"$\",\"div\",null,{\"children\":[[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\"}}],[\"$\",\"h1\",null,{\"className\":\"next-error-h1\",\"style\":\"$0:f:0:1:0:props:children:1:props:children:props:children:props:children:props:notFound:0:1:props:children:props:children:1:props:style\",\"children\":404}],[\"$\",\"div\",null,{\"style\":\"$0:f:0:1:0:props:children:1:props:children:props:children:props:children:props:notFound:0:1:props:children:props:children:2:props:style\",\"children\":[\"$\",\"h2\",null,{\"style\":\"$0:f:0:1:0:props:children:1:props:children:props:children:props:children:props:notFound:0:1:props:children:props:children:2:props:children:props:style\",\"children\":\"This page could not be found.\"}]}]]}]}]],[]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[[\"$\",\"$1\",\"c\",{\"children\":[[\"$\",\"$L5\",null,{\"Component\":\"$6\",\"serverProvidedParams\":{\"searchParams\":{},\"params\":{},\"promises\":[\"$@7\",\"$@8\"]}}],[[\"$\",\"script\",\"script-0\",{\"src\":\"/_next/static/chunks/0w2hcfkj.j1ij.js\",\"async\":true,\"nonce\":\"$undefined\"}]],[\"$\",\"$L9\",null,{\"children\":[\"$\",\"$a\",null,{\"name\":\"Next.MetadataOutlet\",\"children\":\"$@b\"}]}]]}],{},null,false,null]},null,false,\"$@c\"]},null,false,null],[\"$\",\"$1\",\"h\",{\"children\":[null,[\"$\",\"$Ld\",null,{\"children\":\"$Le\"}],[\"$\",\"div\",null,{\"hidden\":true,\"children\":[\"$\",\"$Lf\",null,{\"children\":[\"$\",\"$a\",null,{\"name\":\"Next.Metadata\",\"children\":\"$L10\"}]}]}],[\"$\",\"meta\",null,{\"name\":\"next-size-adjust\",\"content\":\"\"}]]}],false]],\"m\":\"$undefined\",\"G\":[\"$11\",[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/chunks/13igt_-ip_gy3.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}]]],\"S\":true,\"h\":null,\"s\":\"$undefined\",\"l\":\"$undefined\",\"p\":\"$undefined\",\"d\":\"$undefined\",\"b\":\"pPEbDgW-Qb--HPDKYi6OD\"}\n"])</script>
+    <script>self.__next_f.push([1, "12:[]\nc:\"$W12\"\n7:{}\n8:\"$0:f:0:1:1:children:1:children:0:props:children:0:props:serverProvidedParams:params\"\n"])</script>
+    <script>self.__next_f.push([1, "e:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"meta\",\"1\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}]]\n"])</script>
+    <script>self.__next_f.push([1, "13:I[22535,[\"/_next/static/chunks/109ek933tv7sr.js\",\"/_next/static/chunks/0e0597~-2_0cj.js\"],\"IconMark\"]\nb:null\n10:[[\"$\",\"title\",\"0\",{\"children\":\"DungeonSelect\"}],[\"$\",\"meta\",\"1\",{\"name\":\"description\",\"content\":\"An epic Minecraft mod with dark dungeons, legendary bosses, rare artifacts and a limitless adventure.\"}],[\"$\",\"link\",\"2\",{\"rel\":\"icon\",\"href\":\"/logo.png\"}],[\"$\",\"$L13\",\"3\",{}]]\n"])</script>
+    <script>
+            // FAQ Accordion
+            (function () {
+                document.querySelectorAll('.faq-btn').forEach(function (btn) {
+                    btn.addEventListener('click', function () {
+                        var item = btn.closest('.faq-item');
+                        var answer = item.querySelector('.faq-answer');
+                        var icon = btn.querySelector('.faq-icon svg');
+                        var isOpen = answer.style.display !== 'none';
+
+                        // Close all others
+                        document.querySelectorAll('.faq-item').forEach(function (el) {
+                            var a = el.querySelector('.faq-answer');
+                            var s = el.querySelector('.faq-icon svg');
+                            if (a && el !== item) {
+                                a.style.display = 'none';
+                                if (s) s.style.transform = 'rotate(0deg)';
+                            }
+                        });
+
+                        // Toggle current
+                        if (isOpen) {
+                            answer.style.display = 'none';
+                            if (icon) icon.style.transform = 'rotate(0deg)';
+                        } else {
+                            answer.style.display = 'block';
+                            if (icon) icon.style.transform = 'rotate(45deg)';
+                        }
+                    });
+                });
+            })();
+    </script>
+    <script>
+    // ===== TRANSLATION SYSTEM =====
+    (function() {
+
+        var FLAG_EN = '<rect width="512" height="512" fill="#bd3d44"></rect><rect y="39.4" width="512" height="39.4" fill="#fff"></rect><rect y="118.2" width="512" height="39.4" fill="#fff"></rect><rect y="197" width="512" height="39.4" fill="#fff"></rect><rect y="275.8" width="512" height="39.4" fill="#fff"></rect><rect y="354.6" width="512" height="39.4" fill="#fff"></rect><rect y="433.4" width="512" height="39.4" fill="#fff"></rect><rect width="256" height="275.8" fill="#192f5d"></rect>';
+        var FLAG_PT = '<rect width="512" height="512" fill="#009c3b"></rect><polygon points="256,64 488,256 256,448 24,256" fill="#ffdf00"></polygon><circle cx="256" cy="256" r="96" fill="#002776"></circle><path d="M160 256c0-4 0.3-8 0.8-12 28-4 60-6 95.2-6 35 0 67 2 95 6 0.5 4 0.8 8 0.8 12 0 4-0.3 8-0.8 12-28 4-60 6-95 6s-67.2-2-95.2-6c-0.5-4-0.8-8-0.8-12z" fill="#fff"></path>';
+
+        var translations = {
+            en: {
+                // Nav
+                'nav-about': 'About',
+                'nav-highlights': 'Highlights',
+                'nav-installation': 'Installation',
+                'nav-faq': 'FAQ',
+                'nav-download': 'Download',
+                // Hero
+                'hero-badge': 'Action RPG Modpack',
+                'hero-title-line1': 'STEP INTO',
+                'hero-desc': 'Dive into countless dungeons teeming with dangerous monsters and powerful bosses. Gear up with legendary weapons and armor, level up your skills, and rise to every challenge like a true hero.',
+                'hero-btn-download': 'Download Now',
+                'hero-btn-learn': 'Learn More',
+                'hero-endless': 'Endless Dungeons',
+                'hero-procedural': 'Procedurally generated',
+                // Stats
+                'stats-label': 'Adventure in Numbers',
+                'stat-dungeons': 'Generated Dungeons',
+                'stat-bosses': 'Unique Bosses',
+                'stat-weapons': 'Weapons & Armor',
+                'stat-skills': 'Skills',
+                // About
+                'about-label': 'About DungeonSelect',
+                'about-title': 'An immersive RPG<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-red to-[#ff6b6b]">experience awaits</span>',
+                'about-desc': 'Welcome to DungeonSelect, an immersive RPG experience focused on dungeon crawling, monster slaying, and epic progression. Explore a vast world filled with procedurally generated dungeons, each crawling with enemies, traps, and rare loot. Face unique bosses guarding powerful treasures, and test your strength in every battle.',
+                'about-card1-title': 'Dungeon Crawling',
+                'about-card1-desc': 'Procedurally generated dungeons with enemies, traps and rare loot. Every exploration is a new adventure — never repeat the same dungeon.',
+                'about-card2-title': 'Hero Progression',
+                'about-card2-desc': 'Level up your skills, unlock abilities and equip legendary weapons, enchanted armor and mystical artifacts to survive.',
+                'about-card3-title': 'Action Combat',
+                'about-card3-desc': 'Face dangerous monsters and powerful bosses with intense combat mechanics that demand real skill and strategy.',
+                // Highlights
+                'highlights-label': 'Highlights',
+                'highlights-title': 'What Awaits You',
+                'highlights-subtitle': 'Legendary weapons, enchanted armor, and mystical artifacts will be your tools to survive. Prepare to fight, explore, and conquer.',
+                'hl1-title': 'Endless Dungeons',
+                'hl1-desc': 'Every dungeon is procedurally generated with unique layouts, varied enemies and rare rewards. No exploration is ever the same.',
+                'hl2-title': 'Legendary Arsenal',
+                'hl2-desc': 'Collect legendary weapons, enchanted armor and mystical artifacts. Each item has unique attributes that change your combat style.',
+                'hl3-title': 'Brutal Challenges',
+                'hl3-desc': 'Deadly traps, monster hordes and complex puzzles. Every room is a skill test that rewards the brave.',
+                'hl4-title': 'Treasure Guardians',
+                'hl4-desc': 'Unique bosses guard powerful treasures with exclusive combat mechanics, multiple phases and legendary loot. Test your strength in every battle.',
+                'hl5-title': 'Vast World',
+                'hl5-desc': 'Explore dangerous biomes, discover hidden dungeons and uncover ancient secrets scattered across an immense world full of mysteries.',
+                // Installation
+                'install-label': 'How to Install',
+                'install-title': 'Get Started in Minutes',
+                'install-subtitle': 'Follow these simple steps to install the DungeonSelect modpack and begin your adventure.',
+                'step1-title': 'Download the Package',
+                'step1-desc': 'Download the DungeonSelect .zip from our download section.',
+                'step1-tip': 'The package includes the mod and Fabric installer for Minecraft 1.21.11',
+                'step2-title': 'Install Fabric',
+                'step2-desc': 'Extract the .zip and run the Fabric installer. Select Minecraft 1.21.11 when prompted.',
+                'step2-tip': 'Make sure to select the correct Minecraft version',
+                'step3-title': 'Install the Mod',
+                'step3-desc': 'Place the DungeonSelect .jar file from the extracted folder into your mods folder.',
+                'step3-tip': 'Or press Win+R and type %appdata%\\.minecraft\\mods',
+                'step4-title': 'Launch Minecraft',
+                'step4-desc': 'Open the Minecraft Launcher, select the Fabric profile, and click Play!',
+                'step4-tip': 'Make sure you have enough RAM allocated (4GB+ recommended)',
+                // Download
+                'download-label': 'Your Legend Starts Here',
+                'download-title': 'Prepare to Fight<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-red to-[#ff6b6b]">and Conquer</span>',
+                'download-desc': 'Download DungeonSelect for free and dive into a world of dungeons, monsters and legendary rewards. Your epic adventure starts now.',
+                'download-btn': 'Free Download',
+                'download-mc': 'MC Version',
+                'download-loader': 'Mod Loader',
+                'download-free': 'Forever',
+                // FAQ
+                'faq-label': 'Frequently Asked Questions',
+                'faq-title': 'Common Questions',
+                'faq-subtitle': 'Find answers to the most common questions about the DungeonSelect modpack.',
+                'faq-q1': 'Which Minecraft version is compatible?',
+                'faq-a1': 'DungeonSelect is compatible with Minecraft 1.21.11 using the Fabric mod loader. The download package includes the Fabric installer for the correct version.',
+                'faq-q2': 'Is the modpack free?',
+                'faq-a2': 'Yes! DungeonSelect is completely free to download and play. Simply download the .zip package from our download section, install Fabric, and place the mod in your Minecraft mods folder.',
+                'faq-q3': 'Can I use it with other mods?',
+                'faq-a3': 'DungeonSelect is designed to be compatible with most Fabric mods. However, some mods that significantly alter world generation or combat systems may conflict. We recommend testing carefully and checking our Discord for community-tested mod combinations.',
+                'faq-q4': 'Are dungeons always different?',
+                'faq-a4': 'Yes! All dungeons are procedurally generated, meaning each one has a unique layout, enemy placement, traps, and loot. No two dungeons are alike — you\'ll never explore the same dungeon twice.',
+                'faq-q5': 'How do I report bugs or suggest features?',
+                'faq-a5': 'Join our Discord server to report bugs, suggest features, and connect with the community. You can also open an issue on our GitHub repository. We actively read all feedback and strive to improve with every update.',
+                'faq-q6': 'Does it work on multiplayer servers?',
+                'faq-a6': 'Yes! DungeonSelect supports multiplayer. Both the server and all clients need to have the mod installed. The dungeon generation is synchronized between players, so you can explore and fight together in real-time.',
+                // Footer / Discord
+                'discord-title': 'Join Our Community',
+                'discord-desc': 'Connect with thousands of players, share your adventures, and get the latest news about DungeonSelect updates.',
+                'discord-btn': 'Join Discord',
+                'footer-rights': '© 2026 DungeonSelect All rights reserved.',
+                'footer-desc': 'An action RPG modpack for Minecraft with endless dungeons, epic bosses and legendary progression.'
+            },
+            pt: {
+                // Nav
+                'nav-about': 'Sobre',
+                'nav-highlights': 'Destaques',
+                'nav-installation': 'Instalação',
+                'nav-faq': 'FAQ',
+                'nav-download': 'Baixar',
+                // Hero
+                'hero-badge': 'Modpack RPG de Ação',
+                'hero-title-line1': 'ENTRE EM',
+                'hero-desc': 'Mergulhe em incontáveis masmorras repletas de monstros perigosos e chefes poderosos. Equipe-se com armas e armaduras lendárias, evolua suas habilidades e enfrente cada desafio como um verdadeiro herói.',
+                'hero-btn-download': 'Baixar Agora',
+                'hero-btn-learn': 'Saiba Mais',
+                'hero-endless': 'Masmorras Infinitas',
+                'hero-procedural': 'Geração procedural',
+                // Stats
+                'stats-label': 'A Aventura em Números',
+                'stat-dungeons': 'Masmorras Geradas',
+                'stat-bosses': 'Chefes Únicos',
+                'stat-weapons': 'Armas e Armaduras',
+                'stat-skills': 'Habilidades',
+                // About
+                'about-label': 'Sobre o DungeonSelect',
+                'about-title': 'Uma experiência RPG<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-red to-[#ff6b6b]">imersiva te espera</span>',
+                'about-desc': 'Bem-vindo ao DungeonSelect, uma experiência RPG imersiva focada em explorar masmorras, derrotar monstros e progredir de forma épica. Explore um vasto mundo cheio de masmorras geradas proceduralmente, repletas de inimigos, armadilhas e saques raros. Enfrente chefes únicos que guardam tesouros poderosos e teste sua força em cada batalha.',
+                'about-card1-title': 'Exploração de Masmorras',
+                'about-card1-desc': 'Masmorras geradas proceduralmente com inimigos, armadilhas e saques raros. Cada exploração é uma nova aventura — nunca repita a mesma masmorra.',
+                'about-card2-title': 'Progressão do Herói',
+                'about-card2-desc': 'Suba de nível, desbloqueie habilidades e equipe armas lendárias, armaduras encantadas e artefatos místicos para sobreviver.',
+                'about-card3-title': 'Combate de Ação',
+                'about-card3-desc': 'Enfrente monstros perigosos e chefes poderosos com mecânicas de combate intensas que exigem habilidade e estratégia reais.',
+                // Highlights
+                'highlights-label': 'Destaques',
+                'highlights-title': 'O Que Te Espera',
+                'highlights-subtitle': 'Armas lendárias, armaduras encantadas e artefatos místicos serão suas ferramentas para sobreviver. Prepare-se para lutar, explorar e conquistar.',
+                'hl1-title': 'Masmorras Infinitas',
+                'hl1-desc': 'Cada masmorra é gerada proceduralmente com layouts únicos, inimigos variados e recompensas raras. Nenhuma exploração é igual à outra.',
+                'hl2-title': 'Arsenal Lendário',
+                'hl2-desc': 'Colete armas lendárias, armaduras encantadas e artefatos místicos. Cada item tem atributos únicos que mudam seu estilo de combate.',
+                'hl3-title': 'Desafios Brutais',
+                'hl3-desc': 'Armadilhas mortais, hordas de monstros e quebra-cabeças complexos. Cada sala é um teste de habilidade que recompensa os corajosos.',
+                'hl4-title': 'Guardiões do Tesouro',
+                'hl4-desc': 'Chefes únicos guardam tesouros poderosos com mecânicas exclusivas, múltiplas fases e saque lendário. Teste sua força em cada batalha.',
+                'hl5-title': 'Mundo Vasto',
+                'hl5-desc': 'Explore biomas perigosos, descubra masmorras ocultas e revele segredos antigos espalhados por um imenso mundo cheio de mistérios.',
+                // Installation
+                'install-label': 'Como Instalar',
+                'install-title': 'Comece em Minutos',
+                'install-subtitle': 'Siga estes passos simples para instalar o modpack DungeonSelect e começar sua aventura.',
+                'step1-title': 'Baixar o Pacote',
+                'step1-desc': 'Baixe o arquivo .jar do DungeonSelect na nossa seção de download.',
+                'step1-tip': 'O pacote inclui o mod e o instalador do Fabric para Minecraft 1.21.11',
+                'step2-title': 'Instalar o Fabric',
+                'step2-desc': 'Extraia o .zip e execute o instalador do Fabric. Selecione Minecraft 1.21.11 quando solicitado.',
+                'step2-tip': 'Certifique-se de selecionar a versão correta do Minecraft',
+                'step3-title': 'Instalar o Mod',
+                'step3-desc': 'Coloque o arquivo .jar do DungeonSelect (da pasta extraída) na pasta mods.',
+                'step3-tip': 'Ou pressione Win+R e digite %appdata%\\.minecraft\\mods',
+                'step4-title': 'Iniciar o Minecraft',
+                'step4-desc': 'Abra o Minecraft Launcher, selecione o perfil Fabric e clique em Jogar!',
+                'step4-tip': 'Certifique-se de alocar RAM suficiente (4GB+ recomendado)',
+                // Download
+                'download-label': 'Sua Lenda Começa Aqui',
+                'download-title': 'Prepare-se para Lutar<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-red to-[#ff6b6b]">e Conquistar</span>',
+                'download-desc': 'Baixe o DungeonSelect gratuitamente e mergulhe em um mundo de masmorras, monstros e recompensas lendárias. Sua aventura épica começa agora.',
+                'download-btn': 'Download Grátis',
+                'download-mc': 'Versão MC',
+                'download-loader': 'Mod Loader',
+                'download-free': 'Para Sempre',
+                // FAQ
+                'faq-label': 'Perguntas Frequentes',
+                'faq-title': 'Perguntas Comuns',
+                'faq-subtitle': 'Encontre respostas para as perguntas mais comuns sobre o modpack DungeonSelect.',
+                'faq-q1': 'Qual versão do Minecraft é compatível?',
+                'faq-a1': 'O DungeonSelect é compatível com Minecraft 1.21.11 usando o mod loader Fabric. O pacote de download inclui o instalador do Fabric para a versão correta.',
+                'faq-q2': 'O modpack é gratuito?',
+                'faq-a2': 'Sim! O DungeonSelect é completamente gratuito para baixar e jogar. Basta baixar o pacote .zip da nossa seção de download, instalar o Fabric e colocar o mod na pasta de mods do Minecraft.',
+                'faq-q3': 'Posso usar com outros mods?',
+                'faq-a3': 'O DungeonSelect foi projetado para ser compatível com a maioria dos mods Fabric. No entanto, alguns mods que alteram significativamente a geração de mundo ou sistemas de combate podem conflitar. Recomendamos testar com cuidado antes de combinar com outros mods.',
+                'faq-q4': 'As masmorras são sempre diferentes?',
+                'faq-a4': 'Sim! Todas as masmorras são geradas proceduralmente, o que significa que cada uma tem um layout único, posicionamento de inimigos, armadilhas e saque. Nenhuma masmorra é igual à outra — você nunca explorará a mesma duas vezes.',
+                'faq-q5': 'Como reporto bugs ou sugiro funcionalidades?',
+                'faq-a5': 'Use nossos canais de suporte para reportar bugs ou sugerir funcionalidades. Lemos todos os feedbacks e buscamos melhorar a cada atualização.',
+                'faq-q6': 'Funciona em servidores multiplayer?',
+                'faq-a6': 'Sim! O DungeonSelect suporta multiplayer. Tanto o servidor quanto todos os clientes precisam ter o mod instalado. A geração de masmorras é sincronizada entre os jogadores, para que você possa explorar e lutar juntos em tempo real.',
+                // Footer / Discord
+                'discord-title': 'Junte-se à Nossa Comunidade',
+                'discord-desc': 'Conecte-se com milhares de jogadores, compartilhe suas aventuras e receba as últimas novidades sobre atualizações do DungeonSelect.',
+                'discord-btn': 'Entrar no Discord',
+                'footer-rights': '© 2026 DungeonSelect Todos os direitos reservados.',
+                'footer-desc': 'Um modpack RPG de ação para Minecraft com masmorras infinitas, chefes épicos e progressão lendária.'
+            }
+        };
+
+        var currentLang = localStorage.getItem('nd-lang') || 'en';
+        var navKeys = ['nav-about','nav-highlights','nav-installation','nav-faq'];
+
+        function applyTranslation(lang) {
+            var t = translations[lang];
+            if (!t) return;
+
+            document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+
+            // ---- NAV ----
+            document.querySelectorAll('header nav button span').forEach(function(el, i) {
+                if (navKeys[i]) el.textContent = t[navKeys[i]];
+            });
+
+            document.querySelectorAll('a[download]').forEach(function(a) {
+                if (a.classList.contains('font-minecraft')) a.textContent = t['nav-download'];
+            });
+
+            // ---- HERO ----
+            var badge = document.querySelector('.font-minecraft.text-\\[12px\\].text-red\\/90');
+            if (badge) badge.innerHTML = t['hero-badge'] + ' <span class="text-[11px] text-white/20 font-mono">v1.0</span>';
+
+            var h1 = document.querySelector('h1.font-minecraft');
+            if (h1) {
+                var span = h1.querySelector('span');
+                if (span) h1.innerHTML = t['hero-title-line1'] + '<br>' + span.outerHTML;
+            }
+
+            var heroDesc = document.querySelector('section p.text-white\\/40.text-\\[15px\\]');
+            if (heroDesc) heroDesc.textContent = t['hero-desc'];
+
+            var heroBtns = document.querySelectorAll('section .flex.flex-col.sm\\:flex-row a.font-minecraft');
+            if (heroBtns[0]) heroBtns[0].textContent = t['hero-btn-download'];
+            if (heroBtns[1]) heroBtns[1].textContent = t['hero-btn-learn'];
+
+            var endlessDungeons = document.querySelector('.font-minecraft.text-\\[11px\\].text-red.uppercase.tracking-widest');
+            if (endlessDungeons) endlessDungeons.textContent = t['hero-endless'];
+            var procGen = document.querySelector('.text-\\[11px\\].text-white\\/25.mt-1');
+            if (procGen) procGen.textContent = t['hero-procedural'];
+
+            // ---- STATS ----
+            var statsSec = document.getElementById('stats');
+            if (statsSec) {
+                var statsLabel = statsSec.querySelector('p.uppercase.tracking-\\[0\\.25em\\]');
+                if (statsLabel) statsLabel.textContent = t['stats-label'];
+                var statKeys = ['stat-dungeons','stat-bosses','stat-weapons','stat-skills'];
+                statsSec.querySelectorAll('.tracking-\\[0\\.18em\\]').forEach(function(el, i) {
+                    if (statKeys[i]) el.textContent = t[statKeys[i]];
+                });
+            }
+
+            // ---- ABOUT ----
+            var aboutSec = document.getElementById('about');
+            if (aboutSec) {
+                var aboutLabel = aboutSec.querySelector('p.uppercase.tracking-\\[0\\.25em\\]');
+                if (aboutLabel) aboutLabel.textContent = t['about-label'];
+                var aboutTitle = aboutSec.querySelector('h2');
+                if (aboutTitle) aboutTitle.innerHTML = t['about-title'];
+                var aboutDesc = aboutSec.querySelector('p.text-white\\/35');
+                if (aboutDesc) aboutDesc.textContent = t['about-desc'];
+                var cardKeys = [
+                    ['about-card1-title','about-card1-desc'],
+                    ['about-card2-title','about-card2-desc'],
+                    ['about-card3-title','about-card3-desc']
+                ];
+                aboutSec.querySelectorAll('.flex.flex-col.justify-between h3').forEach(function(h3, i) {
+                    var p = h3.parentElement.querySelector('p');
+                    if (cardKeys[i]) {
+                        h3.textContent = t[cardKeys[i][0]];
+                        if (p) p.textContent = t[cardKeys[i][1]];
+                    }
+                });
+            }
+
+            // ---- HIGHLIGHTS ----
+            var hlSec = document.getElementById('highlights');
+            if (hlSec) {
+                var hlLabel = hlSec.querySelector('p.uppercase.tracking-\\[0\\.25em\\]');
+                if (hlLabel) hlLabel.textContent = t['highlights-label'];
+                var hlTitle = hlSec.querySelector('h2');
+                if (hlTitle) hlTitle.textContent = t['highlights-title'];
+                var hlSub = hlSec.querySelector('p.text-center.text-white\\/35');
+                if (hlSub) hlSub.textContent = t['highlights-subtitle'];
+                var hlKeys = [
+                    ['hl1-title','hl1-desc'],['hl2-title','hl2-desc'],['hl3-title','hl3-desc'],
+                    ['hl4-title','hl4-desc'],['hl5-title','hl5-desc']
+                ];
+                hlSec.querySelectorAll('h3').forEach(function(h3, i) {
+                    var p = h3.nextElementSibling;
+                    if (!p || p.tagName !== 'P') p = h3.parentElement.querySelector('p');
+                    if (hlKeys[i]) {
+                        h3.textContent = t[hlKeys[i][0]];
+                        if (p) p.textContent = t[hlKeys[i][1]];
+                    }
+                });
+            }
+
+            // ---- INSTALLATION ----
+            var installSec = document.getElementById('installation');
+            if (installSec) {
+                var installLabel = installSec.querySelector('p.uppercase.tracking-\\[0\\.25em\\]');
+                if (installLabel) installLabel.textContent = t['install-label'];
+                var installTitle = installSec.querySelector('h2');
+                if (installTitle) installTitle.textContent = t['install-title'];
+                var installSub = installSec.querySelector('p.text-center.text-white\\/35');
+                if (installSub) installSub.textContent = t['install-subtitle'];
+                var stepTKeys = ['step1-title','step2-title','step3-title','step4-title'];
+                var stepDKeys = ['step1-desc','step2-desc','step3-desc','step4-desc'];
+                var stepTipKeys = ['step1-tip','step2-tip','step3-tip','step4-tip'];
+                installSec.querySelectorAll('h3').forEach(function(el, i) {
+                    if (stepTKeys[i]) el.textContent = t[stepTKeys[i]];
+                });
+                installSec.querySelectorAll('.rounded-xl p.text-\\[13px\\].text-white\\/40').forEach(function(el, i) {
+                    if (stepDKeys[i]) el.textContent = t[stepDKeys[i]];
+                });
+                installSec.querySelectorAll('.rounded-xl span.text-\\[12px\\].text-red\\/70').forEach(function(el, i) {
+                    if (stepTipKeys[i]) el.textContent = t[stepTipKeys[i]];
+                });
+            }
+
+            // ---- DOWNLOAD ----
+            var downloadSec = document.getElementById('download');
+            if (downloadSec) {
+                var dlLabel = downloadSec.querySelector('p.uppercase.tracking-\\[0\\.25em\\]');
+                if (dlLabel) dlLabel.textContent = t['download-label'];
+                var dlTitle = downloadSec.querySelector('h2');
+                if (dlTitle) dlTitle.innerHTML = t['download-title'];
+                var dlDesc = downloadSec.querySelector('p.text-white\\/35');
+                if (dlDesc) dlDesc.textContent = t['download-desc'];
+                var dlBtn = downloadSec.querySelector('a.font-minecraft');
+                if (dlBtn) {
+                    var svg = dlBtn.querySelector('svg');
+                    dlBtn.textContent = '';
+                    if (svg) dlBtn.appendChild(svg);
+                    dlBtn.appendChild(document.createTextNode(t['download-btn']));
+                }
+                var dlMetaKeys = ['download-mc','download-loader','download-free'];
+                downloadSec.querySelectorAll('p.text-\\[10px\\]').forEach(function(el, i) {
+                    if (dlMetaKeys[i]) el.textContent = t[dlMetaKeys[i]];
+                });
+            }
+
+            // ---- FAQ ----
+            var faqSec = document.getElementById('faq');
+            if (faqSec) {
+                var faqLabel = faqSec.querySelector('p.uppercase.tracking-\\[0\\.25em\\]');
+                if (faqLabel) faqLabel.textContent = t['faq-label'];
+                var faqTitle = faqSec.querySelector('h2');
+                if (faqTitle) faqTitle.textContent = t['faq-title'];
+                var faqSub = faqSec.querySelector('p.text-center.text-white\\/35');
+                if (faqSub) faqSub.textContent = t['faq-subtitle'];
+                var faqQKeys = ['faq-q1','faq-q2','faq-q3','faq-q4','faq-q5','faq-q6'];
+                var faqAKeys = ['faq-a1','faq-a2','faq-a3','faq-a4','faq-a5','faq-a6'];
+                faqSec.querySelectorAll('.faq-item').forEach(function(item, i) {
+                    var q = item.querySelector('.faq-btn span');
+                    var a = item.querySelector('.faq-answer p');
+                    if (q && faqQKeys[i]) q.textContent = t[faqQKeys[i]];
+                    if (a && faqAKeys[i]) a.textContent = t[faqAKeys[i]];
+                });
+            }
+
+            // ---- FOOTER ----
+            var footer = document.querySelector('footer');
+            if (footer) {
+                footer.querySelectorAll('p').forEach(function(p) {
+                    if (p.classList.contains('text-\\[11px\\]') && p.classList.contains('text-white\\/20'))
+                        p.textContent = t['footer-desc'];
+                    if (p.textContent.indexOf('rights reserved') !== -1 || p.textContent.indexOf('direitos reservados') !== -1)
+                        p.textContent = t['footer-rights'];
+                });
+            }
+        }
+
+        function setLangUI(lang) {
+            var flag = document.getElementById('lang-flag');
+            var label = document.getElementById('lang-label');
+            if (label) label.textContent = lang.toUpperCase();
+            if (flag) flag.innerHTML = lang === 'pt' ? FLAG_PT : FLAG_EN;
+        }
+
+        // ---- BUTTON HANDLER ----
+        var btn = document.getElementById('lang-btn');
+
+        if (btn) {
+            btn.addEventListener('click', function() {
+                currentLang = currentLang === 'en' ? 'pt' : 'en';
+                localStorage.setItem('nd-lang', currentLang);
+                setLangUI(currentLang);
+                applyTranslation(currentLang);
+            });
+        }
+
+        if (currentLang === 'pt') {
+            setLangUI('pt');
+            applyTranslation('pt');
+        }
+    })();
+    </script>
+    <script>
+    (function () {
+        var SESSION_VISIT_KEY = 'eld_discord_site_visit_logged_v1';
+        var GEO_CACHE_KEY = 'eld_visitor_geo_v3';
+        var GEO_CACHE_MS = 30 * 60 * 1000;
+        var NAV_HASHES = { '#about': 1, '#highlights': 1, '#installation': 1, '#faq': 1 };
+        var geoFetchPromise = null;
+
+        function summarizeBrowser(ua) {
+            if (!ua || typeof ua !== 'string') return 'Desconhecido';
+            if (/Edg\//.test(ua)) return 'Microsoft Edge';
+            if (/Firefox\//.test(ua) && !/Seamonkey/i.test(ua)) return 'Mozilla Firefox';
+            if (/OPR\/|Opera/i.test(ua)) return 'Opera';
+            if (/Chrome\//.test(ua) && !/Edg\//.test(ua)) return 'Google Chrome';
+            if (/Safari/i.test(ua) && !/Chrome/i.test(ua)) return 'Safari';
+            return ua.length > 140 ? ua.slice(0, 137) + '\u2026' : ua;
+        }
+
+        function ensureDiscordLogFrame() {
+            var id = 'discord-download-log-frame';
+            var el = document.getElementById(id);
+            if (!el) {
+                el = document.createElement('iframe');
+                el.id = id;
+                el.name = id;
+                el.title = '';
+                el.setAttribute('aria-hidden', 'true');
+                el.tabIndex = -1;
+                el.style.cssText = 'position:absolute;width:0;height:0;border:0;visibility:hidden';
+                document.body.appendChild(el);
+            }
+            return el.name;
+        }
+
+        function postDiscordWebhookForm(webhookUrl, discordBody) {
+            var sep = webhookUrl.indexOf('?') >= 0 ? '&' : '?';
+            var action = webhookUrl + sep + 'wait=false';
+            var frameName = ensureDiscordLogFrame();
+            var form = document.createElement('form');
+            form.method = 'POST';
+            form.action = action;
+            form.target = frameName;
+            form.acceptCharset = 'UTF-8';
+            form.style.display = 'none';
+            var input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'payload_json';
+            input.value = JSON.stringify(discordBody);
+            form.appendChild(input);
+            document.body.appendChild(form);
+            form.submit();
+            document.body.removeChild(form);
+        }
+
+        function scrollToAnchor(hash) {
+            var id = (hash || '').replace(/^#/, '');
+            var sec = document.getElementById(id);
+            if (!sec) return;
+            var headerPad = 80;
+            var targetY = sec.getBoundingClientRect().top + window.scrollY - headerPad;
+            var startY = window.scrollY;
+            var delta = targetY - startY;
+            var t0 = performance.now();
+            function ease(t) {
+                return 1 - Math.pow(1 - t, 4);
+            }
+            function step(now) {
+                var u = Math.min((now - t0) / 800, 1);
+                window.scrollTo(0, startY + delta * ease(u));
+                if (u < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+        }
+
+        function readGeoCache() {
+            try {
+                var raw = sessionStorage.getItem(GEO_CACHE_KEY);
+                if (!raw) return null;
+                var parsed = JSON.parse(raw);
+                if (!parsed || !parsed.ts || Date.now() - parsed.ts > GEO_CACHE_MS) return null;
+                return parsed.data || null;
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function writeGeoCache(data) {
+            if (!data || !data.ip) return;
+            try {
+                sessionStorage.setItem(
+                    GEO_CACHE_KEY,
+                    JSON.stringify({ ts: Date.now(), data: data })
+                );
+            } catch (e) { /* ignore */ }
+        }
+
+        function fetchJson(url, ms) {
+            var ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+            var timer = ctrl
+                ? setTimeout(function () {
+                      try {
+                          ctrl.abort();
+                      } catch (e) { /* ignore */ }
+                  }, ms || 6000)
+                : null;
+            return fetch(url, ctrl ? { signal: ctrl.signal } : undefined)
+                .then(function (r) {
+                    if (timer) clearTimeout(timer);
+                    if (!r.ok) return null;
+                    return r.json();
+                })
+                .catch(function () {
+                    if (timer) clearTimeout(timer);
+                    return null;
+                });
+        }
+
+        function normalizeGeoFromIpwho(data) {
+            if (!data || data.success === false || !data.ip) return null;
+            return {
+                ip: data.ip,
+                city: data.city || '',
+                state: data.region || data.region_code || '',
+                country: data.country || ''
+            };
+        }
+
+        function normalizeGeoFromIpapi(data) {
+            if (!data || data.error || !data.ip) return null;
+            return {
+                ip: data.ip,
+                city: data.city || '',
+                state: data.region || data.region_code || '',
+                country: data.country_name || data.country_code || ''
+            };
+        }
+
+        function normalizeGeoFromIpApiCom(data) {
+            if (!data || data.status !== 'success' || !data.query) return null;
+            return {
+                ip: data.query,
+                city: data.city || '',
+                state: data.regionName || data.region || '',
+                country: data.country || ''
+            };
+        }
+
+        function fetchGeoFromProviders() {
+            return fetchJson('https://ipwho.is/', 6000).then(function (data) {
+                var geo = normalizeGeoFromIpwho(data);
+                if (geo) return geo;
+                return fetchJson('https://ipapi.co/json/', 6000).then(function (data2) {
+                    geo = normalizeGeoFromIpapi(data2);
+                    if (geo) return geo;
+                    return fetchJson(
+                        'https://ip-api.com/json/?fields=status,message,country,countryCode,city,regionName,query',
+                        6000
+                    ).then(function (data3) {
+                        return normalizeGeoFromIpApiCom(data3);
+                    });
+                });
+            });
+        }
+
+        function getVisitorGeo() {
+            var cached = readGeoCache();
+            if (cached && cached.ip) return Promise.resolve(cached);
+            if (geoFetchPromise) return geoFetchPromise;
+            geoFetchPromise = fetchGeoFromProviders()
+                .then(function (geo) {
+                    if (geo && geo.ip) writeGeoCache(geo);
+                    return geo || null;
+                })
+                .finally(function () {
+                    geoFetchPromise = null;
+                });
+            return geoFetchPromise;
+        }
+
+        function prefetchVisitorGeo() {
+            getVisitorGeo().catch(function () {});
+        }
+
+        function sendDiscordAnalyticsWebhook(webhookUrl, opts) {
+            opts = opts || {};
+            var ua = navigator.userAgent || '';
+            var browser = summarizeBrowser(ua);
+            var uaChunk = ua.replace(/`/g, "'").slice(0, 900);
+
+                function postWithGeo(geo) {
+                    geo = geo || {};
+                    var ip = geo.ip || 'N\u00e3o detectado';
+                    var city = geo.city || '\u2014';
+                    var state = geo.state || '\u2014';
+                    var country = geo.country || '\u2014';
+                    var lang = navigator.language || '\u2014';
+                    var ref = document.referrer || '\u2014';
+                    var vw = typeof window.innerWidth === 'number' ? window.innerWidth : '';
+                    var vh = typeof window.innerHeight === 'number' ? window.innerHeight : '';
+                    var viewport =
+                        vw !== '' && vh !== '' ? vw + ' \u00d7 ' + vh + ' px' : '\u2014';
+
+                    var discordBody = {
+                        embeds: [
+                            {
+                                title: opts.title || 'DungeonSelect — Log',
+                                description: opts.description || '',
+                                color: typeof opts.color === 'number' ? opts.color : 0xd4a017,
+                                fields: [
+                                    {
+                                        name: 'Evento',
+                                        value: String(opts.eventLabel || '\u2014').slice(0, 1024),
+                                        inline: false
+                                    },
+                                    {
+                                        name: 'URL',
+                                        value: String(window.location.href || '\u2014').slice(0, 1024),
+                                        inline: false
+                                    },
+                                    {
+                                        name: 'IP',
+                                        value: '`' + String(ip).slice(0, 45) + '`',
+                                        inline: true
+                                    },
+                                    {
+                                        name: 'Cidade',
+                                        value: String(city).slice(0, 256),
+                                        inline: true
+                                    },
+                                    {
+                                        name: 'Estado',
+                                        value: String(state).slice(0, 256),
+                                        inline: true
+                                    },
+                                    {
+                                        name: 'País',
+                                        value: String(country).slice(0, 256),
+                                        inline: true
+                                    },
+                                    {
+                                        name: 'Navegador',
+                                        value: browser.slice(0, 256),
+                                        inline: true
+                                    },
+                                    {
+                                        name: 'Viewport',
+                                        value: viewport,
+                                        inline: true
+                                    },
+                                    {
+                                        name: 'User-Agent',
+                                        value: '```\n' + uaChunk + '\n```',
+                                        inline: false
+                                    },
+                                    {
+                                        name: 'Idioma',
+                                        value: String(lang).slice(0, 64),
+                                        inline: true
+                                    },
+                                    {
+                                        name: 'Referrer',
+                                        value: String(ref).slice(0, 500),
+                                        inline: true
+                                    }
+                                ],
+                                footer: { text: '# log-downloads' },
+                                timestamp: new Date().toISOString()
+                            }
+                        ]
+                    };
+                    postDiscordWebhookForm(webhookUrl, discordBody);
+            }
+
+            if (opts.immediate) {
+                postWithGeo(readGeoCache());
+                return;
+            }
+            getVisitorGeo().then(postWithGeo);
+        }
+
+        function discordWebhookConfigured(cfg) {
+            return !!(cfg && cfg.discordWebhookUrl);
+        }
+
+        function sendDownloadLogViaWebhook(webhookUrl) {
+            sendDiscordAnalyticsWebhook(webhookUrl, {
+                title: 'Download — DungeonSelect',
+                description: 'Clique para baixar o `.jar`.',
+                eventLabel: 'Download do pacote (.jar)',
+                color: 0xd4a017,
+                immediate: true
+            });
+        }
+
+        function sendDownloadLogViaWorker(endpoint, secret) {
+            var payload = JSON.stringify({
+                userAgent: navigator.userAgent,
+                language: navigator.language || '',
+                referrer: document.referrer || ''
+            });
+            var headers = { 'Content-Type': 'application/json' };
+            if (secret) headers['X-Download-Log-Secret'] = secret;
+            fetch(endpoint, {
+                method: 'POST',
+                headers: headers,
+                body: payload,
+                keepalive: true,
+                mode: 'cors'
+            }).catch(function () {});
+        }
+
+        function sendDownloadLog() {
+            var cfg = window.__DOWNLOAD_LOG__;
+            if (!cfg) return;
+            if (cfg.endpoint) {
+                sendDownloadLogViaWorker(cfg.endpoint, cfg.secret || '');
+                return;
+            }
+            if (cfg.discordWebhookUrl) {
+                sendDownloadLogViaWebhook(cfg.discordWebhookUrl);
+            }
+        }
+
+        function bindDownloadLogLinks() {
+            document.addEventListener('click', function (event) {
+                var link = event.target.closest && event.target.closest('a[download]');
+                if (link) sendDownloadLog();
+            }, true);
+        }
+
+        function bindNavScrollAndAnalytics() {
+            var cfg = window.__DOWNLOAD_LOG__;
+            document.querySelectorAll('header nav button[data-scroll-target]').forEach(function (btn) {
+                btn.addEventListener(
+                    'click',
+                    function () {
+                        var hash = btn.getAttribute('data-scroll-target');
+                        var label =
+                            hash === '#about'
+                                ? 'Menu — About'
+                                : hash === '#highlights'
+                                  ? 'Menu — Highlights'
+                                  : hash === '#installation'
+                                    ? 'Menu — Installation'
+                                    : hash === '#faq'
+                                      ? 'Menu — FAQ'
+                                      : 'Menu — ' + hash;
+                        scrollToAnchor(hash);
+                        if (discordWebhookConfigured(cfg)) {
+                            sendDiscordAnalyticsWebhook(cfg.discordWebhookUrl, {
+                                title: 'Navegação — topo',
+                                description: 'Clique num item da barra principal.',
+                                eventLabel: label,
+                                color: 0x5865f2
+                            });
+                        }
+                    },
+                    { passive: true }
+                );
+            });
+
+            document.addEventListener(
+                'click',
+                function (ev) {
+                    var a = ev.target.closest('a[href]');
+                    if (!a) return;
+                    var href = a.getAttribute('href');
+                    if (!href || !NAV_HASHES[href]) return;
+                    if (discordWebhookConfigured(window.__DOWNLOAD_LOG__)) {
+                        var cfg = window.__DOWNLOAD_LOG__;
+                        var human =
+                            href === '#about'
+                                ? 'Link âncora — About'
+                                : href === '#highlights'
+                                  ? 'Link âncora — Highlights'
+                                  : href === '#installation'
+                                    ? 'Link âncora — Installation'
+                                    : 'Link âncora — FAQ';
+                        sendDiscordAnalyticsWebhook(cfg.discordWebhookUrl, {
+                            title: 'Navegação — âncora',
+                            description: 'Clique num link para esta secção (rodapé, hero, etc.).',
+                            eventLabel: human,
+                            color: 0x5865f2
+                        });
+                    }
+                },
+                true
+            );
+        }
+
+        function logVisitOncePerSession() {
+            var cfg = window.__DOWNLOAD_LOG__;
+            if (!discordWebhookConfigured(cfg)) return;
+            try {
+                if (sessionStorage.getItem(SESSION_VISIT_KEY)) return;
+                sessionStorage.setItem(SESSION_VISIT_KEY, '1');
+            } catch (e) {
+                /* sessionStorage indisponível — envia mesmo assim uma vez por carregamento */
+            }
+            sendDiscordAnalyticsWebhook(cfg.discordWebhookUrl, {
+                title: 'Visitante — página inicial',
+                description: 'Carregamento do site (uma vez por sessão neste separador).',
+                eventLabel: 'Abriu o site',
+                color: 0x57f287
+            });
+        }
+
+        function boot() {
+            prefetchVisitorGeo();
+            bindDownloadLogLinks();
+            bindNavScrollAndAnalytics();
+            logVisitOncePerSession();
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', boot);
+        } else {
+            boot();
+        }
+    })();
+    </script>
+
+
+
+</body></html>
